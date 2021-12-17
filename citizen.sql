@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th12 16, 2021 lúc 05:11 PM
+-- Thời gian đã tạo: Th12 17, 2021 lúc 10:11 AM
 -- Phiên bản máy phục vụ: 10.4.21-MariaDB
 -- Phiên bản PHP: 8.0.12
 
@@ -64,8 +64,10 @@ CREATE TABLE `khu_vuc` (
 --
 
 CREATE TABLE `phuong_xa` (
+  `id` int(11) NOT NULL,
   `ma_phuong_xa` varchar(50) NOT NULL,
-  `ten_phuong_xa` varchar(50) NOT NULL
+  `ten_phuong_xa` varchar(50) NOT NULL,
+  `id_quan_huyen` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -75,9 +77,19 @@ CREATE TABLE `phuong_xa` (
 --
 
 CREATE TABLE `quan_huyen` (
-  `ma_quan_huyen` varchar(50) NOT NULL,
-  `ten_quan_huyen` varchar(50) NOT NULL
+  `id` int(11) NOT NULL,
+  `ma_quan_huyen` varchar(50) DEFAULT NULL,
+  `ten_quan_huyen` varchar(50) NOT NULL,
+  `id_tinh` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Đang đổ dữ liệu cho bảng `quan_huyen`
+--
+
+INSERT INTO `quan_huyen` (`id`, `ma_quan_huyen`, `ten_quan_huyen`, `id_tinh`) VALUES
+(2, '2412', 'Lạng Giang', 4),
+(3, NULL, 'Yên Thế', 4);
 
 -- --------------------------------------------------------
 
@@ -100,8 +112,10 @@ CREATE TABLE `thoi_diem_khai_bao` (
 --
 
 CREATE TABLE `thon_ban` (
+  `id` int(11) NOT NULL,
   `ma_thon_ban` varchar(50) NOT NULL,
-  `ten_thon_ban` varchar(50) NOT NULL
+  `ten_thon_ban` varchar(50) NOT NULL,
+  `id_phuong_xa` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -111,9 +125,19 @@ CREATE TABLE `thon_ban` (
 --
 
 CREATE TABLE `tinh` (
-  `ma_tinh` varchar(50) NOT NULL,
+  `id` int(11) NOT NULL,
+  `ma_tinh` varchar(50) DEFAULT NULL,
   `ten_tinh` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Đang đổ dữ liệu cho bảng `tinh`
+--
+
+INSERT INTO `tinh` (`id`, `ma_tinh`, `ten_tinh`) VALUES
+(4, '24', 'Thanh Hoá'),
+(5, NULL, 'Phú Thọ'),
+(6, NULL, 'Bắc Giang');
 
 -- --------------------------------------------------------
 
@@ -163,13 +187,15 @@ ALTER TABLE `khu_vuc`
 -- Chỉ mục cho bảng `phuong_xa`
 --
 ALTER TABLE `phuong_xa`
-  ADD PRIMARY KEY (`ma_phuong_xa`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_quan_huyen` (`id_quan_huyen`);
 
 --
 -- Chỉ mục cho bảng `quan_huyen`
 --
 ALTER TABLE `quan_huyen`
-  ADD PRIMARY KEY (`ma_quan_huyen`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_tinh` (`id_tinh`);
 
 --
 -- Chỉ mục cho bảng `thoi_diem_khai_bao`
@@ -181,13 +207,14 @@ ALTER TABLE `thoi_diem_khai_bao`
 -- Chỉ mục cho bảng `thon_ban`
 --
 ALTER TABLE `thon_ban`
-  ADD PRIMARY KEY (`ma_thon_ban`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_phuong_xa` (`id_phuong_xa`);
 
 --
 -- Chỉ mục cho bảng `tinh`
 --
 ALTER TABLE `tinh`
-  ADD PRIMARY KEY (`ma_tinh`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Chỉ mục cho bảng `users`
@@ -204,6 +231,52 @@ ALTER TABLE `users`
 --
 ALTER TABLE `citizen`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `phuong_xa`
+--
+ALTER TABLE `phuong_xa`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `quan_huyen`
+--
+ALTER TABLE `quan_huyen`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT cho bảng `thon_ban`
+--
+ALTER TABLE `thon_ban`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `tinh`
+--
+ALTER TABLE `tinh`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- Các ràng buộc cho các bảng đã đổ
+--
+
+--
+-- Các ràng buộc cho bảng `phuong_xa`
+--
+ALTER TABLE `phuong_xa`
+  ADD CONSTRAINT `phuong_xa_ibfk_1` FOREIGN KEY (`id_quan_huyen`) REFERENCES `quan_huyen` (`id`);
+
+--
+-- Các ràng buộc cho bảng `quan_huyen`
+--
+ALTER TABLE `quan_huyen`
+  ADD CONSTRAINT `quan_huyen_ibfk_1` FOREIGN KEY (`id_tinh`) REFERENCES `tinh` (`id`);
+
+--
+-- Các ràng buộc cho bảng `thon_ban`
+--
+ALTER TABLE `thon_ban`
+  ADD CONSTRAINT `thon_ban_ibfk_1` FOREIGN KEY (`id_phuong_xa`) REFERENCES `phuong_xa` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
