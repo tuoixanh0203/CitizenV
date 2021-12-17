@@ -1,287 +1,226 @@
-<?php 
-// include 'includes/session.php'; 
-?>
-<?php 
-//   include '../timezone.php'; 
-//   $today = date('Y-m-d');
-//   $year = date('Y');
-//   if(isset($_GET['year'])){
-//     $year = $_GET['year'];
-//   }
-?>
-<?php include 'header.php'; ?>
-<body class="hold-transition skin-yellow sidebar-mini"> 
-<div class="wrapper">
+<!DOCTYPE html>
+<html lang="en">
 
-  	<?php include 'navbar.php'; ?>
-  	<?php include 'menubar.php'; ?>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" />
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
+  <!-- <link rel="stylesheet" href="dataTables.bootstrap5.min.css" /> -->
+  <link rel="stylesheet" href="csshome/style.css" />
+  <title>CitizenV</title>
+</head>
 
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        Dashboard
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Dashboard</li>
-      </ol>
-    </section>
-
-    <!-- Main content -->
-    <section class="content">
-      <?php
-        if(isset($_SESSION['error'])){
-          echo "
-            <div class='alert alert-danger alert-dismissible'>
-              <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
-              <h4><i class='icon fa fa-warning'></i> Error!</h4>
-              ".$_SESSION['error']."
-            </div>
-          ";
-          unset($_SESSION['error']);
-        }
-        if(isset($_SESSION['success'])){
-          echo "
-            <div class='alert alert-success alert-dismissible'>
-              <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
-              <h4><i class='icon fa fa-check'></i> Success!</h4>
-              ".$_SESSION['success']."
-            </div>
-          ";
-          unset($_SESSION['success']);
-        }
-      ?>
-      <!-- Small boxes (Stat box) -->
-      <div class="row">
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-orange"> 
-            <div class="inner">
-              <?php
-                $sql = "SELECT * FROM employees";
-                $query = $conn->query($sql);
-
-                echo "<h3>".$query->num_rows."</h3>";
-              ?>
-
-              <p>Total Employees</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-person-stalker"></i> 
-            </div>
-            <a href="employee.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+<body>
+  <!-- top navigation bar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand me-auto ms-lg-0 ms-3 mt-2 text-uppercase fw-bold " href="#">citizenv</a>
+      
+      <div class="collapse navbar-collapse" id="topNavBar">
+        <form class="d-flex ms-auto my-3 my-lg-0">
+          <div class="input-group">
+            <input class="form-control" type="search" 
+                   placeholder="Search" aria-label="Search" />
+            <button class="btn btn-primary" type="submit">
+              <i class="fas fa-search"></i>
+            </button>
           </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-green">
-            <div class="inner">
-              <?php
-                $sql = "SELECT * FROM attendance";
-                $query = $conn->query($sql);
-                $total = $query->num_rows;
+        </form>
 
-                $sql = "SELECT * FROM attendance WHERE status = 1";
-                $query = $conn->query($sql);
-                $early = $query->num_rows;
-                
-                $percentage = ($early/$total)*100;
-
-                echo "<h3>".number_format($percentage, 2)."<sup style='font-size: 20px'>%</sup></h3>";
-              ?>
-          
-              <p>On Time Percentage</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-pie-graph"></i>
-            </div>
-            <a href="attendance.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-yellow">
-            <div class="inner">
-              <?php
-                $sql = "SELECT * FROM attendance WHERE date = '$today' AND status = 1";
-                $query = $conn->query($sql);
-
-                echo "<h3>".$query->num_rows."</h3>"
-              ?>
-             
-              <p>On Time Today</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-clock"></i>
-            </div>
-            <a href="attendance.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-       
-        <div class="col-lg-3 col-xs-6">
-          <div class="small-box bg-red">
-            <div class="inner">
-              <?php
-                $sql = "SELECT * FROM attendance WHERE date = '$today' AND status = 0";
-                $query = $conn->query($sql);
-
-                echo "<h3>".$query->num_rows."</h3>"
-              ?>
-
-              <p>Late Today</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-alert-circled"></i>
-            </div>
-            <a href="attendance.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
+        <li class="navbar-nav nav-item dropdown">
+          <a class="nav-link dropdown-toggle ms-2" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fas fa-user"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="#">Update</a></li>
+            <li><a class="dropdown-item" href="#">Sign out</a></li>
+          </ul>
+        </li>
       </div>
-     
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="box">
-            <div class="box-header with-border">
-              <h3 class="box-title">Monthly Attendance Report</h3>
-              <div class="box-tools pull-right">
-                <form class="form-inline">
-                  <div class="form-group">
-                    <label>Select Year: </label>
-                    <select class="form-control input-sm" id="select_year">
-                      <?php
-                        for($i=2015; $i<=2065; $i++){
-                          $selected = ($i==$year)?'selected':'';
-                          echo "
-                            <option value='".$i."' ".$selected.">".$i."</option>
-                          ";
-                        }
-                      ?>
-                    </select>
-                  </div>
-                </form>
-              </div>
-            </div>
-            <div class="box-body">
-              <div class="chart">
-                <br>
-                <div id="legend" class="text-center"></div>
-                <canvas id="barChart" style="height:350px"></canvas>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      </section>
-      <!-- right col -->
     </div>
-  	<?php include 'includes/footer.php'; ?>
+  </nav>
 
-</div>
-<!-- ./wrapper -->
+  <!-- offcanvas -->
+  <div class="offcanvas offcanvas-start sidebar-nav bg-dark" tabindex="-1" id="sidebar">
+    <!-- .offcanvas-start đặt offcanvas ở bên trái khung nhìn (được hiển thị ở trên)
+         .offcanvas-end đặt offcanvas ở bên phải khung nhìn
+         .offcanvas-top đặt offcanvas trên đỉnh của khung nhìn
+         .offcanvas-bottom đặt offcanvas ở cuối khung nhìn -->
+    <div class="menubar offcanvas-body p-0 navbar-dark mt-2" style="background-color: #222d32;">
+      <ul class="navbar-nav">
+        <li>
+          <div class="text-muted small fw-bold text-uppercase px-3 py-2 ">
+            <!-- px- là padding left, py- là padding top -->
+            báo cáo
+          </div>
+        </li>
+        <li>
+          <a href="#" class="nav-link px-4 active">
+            <span class="me-2"><i class="fas fa-home"></i></span>
+            <span>Trang chủ</span>
+          </a>
+        </li>
+        <li class="my-2">
+          <hr class="dropdown-divider bg-light" />
+        </li>
 
-<!-- Chart Data -->
-<?php
-  $and = 'AND YEAR(date) = '.$year;
-  $months = array();
-  $ontime = array();
-  $late = array();
-  for( $m = 1; $m <= 12; $m++ ) {
-    $sql = "SELECT * FROM attendance WHERE MONTH(date) = '$m' AND status = 1 $and";
-    $oquery = $conn->query($sql);
-    array_push($ontime, $oquery->num_rows);
+        <li>
+          <div class="text-muted small fw-bold text-uppercase px-3 mb-1">
+            <!-- mt- là margin top, mb- là margin bottom -->
+            Quản lý
+          </div>
+        </li>
+        <li>
+          <a class="nav-link px-4 sidebar-link" data-bs-toggle="collapse" href="#layouts">
+            <!-- data-bs-toggle="collapse: Dùng để hiển thị và ẩn nội dung-
+                  .collapse ẩn nội dung
+                  .collapsing được áp dụng trong quá trình chuyển đổi
+                  .collapse.show hiển thị nội dung -->
+            <span class="me-2"><i class="fas fa-book-open"></i></span>
+            <span>Quản lý</span>
+            <span class="ms-auto">
+              <span class="right-icon">
+                <i class="fas fa-chevron-down"></i>
+              </span>
+            </span>
+          </a>
+          <div class="collapse multi-collapse" id="layouts">
+            <ul class="navbar-nav ps-3">
+              <li>
+                <a href="#" class="nav-link px-4">
+                  <span class="me-2"><i class="fas fa-qrcode"></i></span>
+                  <span>Cấp mã tỉnh</span>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="nav-link px-4">
+                  <span class="me-2"><i class="fas fa-users-cog"></i></span>
+                  <span>Cấp tài khoản</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li>
+          <a href="#" class="nav-link px-4">
+            <span class="me-2"><i class="fas fa-users"></i></span>
+            <span>Công dân</span>
+          </a>
+        </li>
 
-    $sql = "SELECT * FROM attendance WHERE MONTH(date) = '$m' AND status = 0 $and";
-    $lquery = $conn->query($sql);
-    array_push($late, $lquery->num_rows);
+        <li class="my-2">
+          <hr class="dropdown-divider bg-light" />
+        </li>
+        <li>
+          <div class="text-muted small fw-bold text-uppercase px-3 mb-3">
+            Bản in
+          </div>
+        </li>
+        <li>
+          <a href="#" class="nav-link px-4">
+            <span class="me-2"><i class="fas fa-list-alt"></i></span>
+            <span>Danh sách công dân</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="nav-link px-4">
+            <span class="me-2"><i class="fas fa-stream"></i></span>
+            <span>Danh sách mã tỉnh</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="nav-link px-4">
+            <span class="me-2"><i class="fas fa-th-list"></i></span>
+            <span>Danh sách User</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!-- offcanvas -->
 
-    $num = str_pad( $m, 2, 0, STR_PAD_LEFT );
-    $month =  date('M', mktime(0, 0, 0, $m, 1));
-    array_push($months, $month);
-  }
+  <main class="mt-5 pt-5">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <h4>Dashboard</h4>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3 mb-3">
+          <div class="card bg-primary text-white h-100">
+            <div class="card-body py-5">Primary Card</div>
+            <div class="card-footer d-flex">
+              View Details
+              <span class="ms-auto">
+                <i class="fas fa-chevron-right"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 mb-3">
+          <div class="card bg-warning text-dark h-100">
+            <div class="card-body py-5">Warning Card</div>
+            <div class="card-footer d-flex">
+              View Details
+              <span class="ms-auto">
+                <i class="fas fa-chevron-right"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 mb-3">
+          <div class="card bg-success text-white h-100">
+            <div class="card-body py-5">Success Card</div>
+            <div class="card-footer d-flex">
+              View Details
+              <span class="ms-auto">
+                <i class="fas fa-chevron-right"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 mb-3">
+          <div class="card bg-danger text-white h-100">
+            <div class="card-body py-5">Danger Card</div>
+            <div class="card-footer d-flex">
+              View Details
+              <span class="ms-auto">
+                <i class="fas fa-chevron-right"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
 
-  $months = json_encode($months);
-  $late = json_encode($late);
-  $ontime = json_encode($ontime);
-
-?>
-<!-- End Chart Data -->
-<?php include 'includes/scripts.php'; ?>
-<script>
-$(function(){
-  var barChartCanvas = $('#barChart').get(0).getContext('2d')
-  var barChart = new Chart(barChartCanvas)
-  var barChartData = {
-    labels  : <?php echo $months; ?>,
-    datasets: [
-      {
-        label               : 'Late',
-        fillColor           : 'rgba(210, 214, 222, 1)',
-        strokeColor         : 'rgba(210, 214, 222, 1)',
-        pointColor          : 'rgba(210, 214, 222, 1)',
-        pointStrokeColor    : '#c1c7d1',
-        pointHighlightFill  : '#fff',
-        pointHighlightStroke: 'rgba(220,220,220,1)',
-        data                : <?php echo $late; ?>
-      },
-      {
-        label               : 'Ontime',
-        fillColor           : 'rgba(60,141,188,0.9)',
-        strokeColor         : 'rgba(60,141,188,0.8)',
-        pointColor          : '#3b8bba',
-        pointStrokeColor    : 'rgba(60,141,188,1)',
-        pointHighlightFill  : '#fff',
-        pointHighlightStroke: 'rgba(60,141,188,1)',
-        data                : <?php echo $ontime; ?>
-      }
-    ]
-  }
-  barChartData.datasets[1].fillColor   = '#00a65a'
-  barChartData.datasets[1].strokeColor = '#00a65a'
-  barChartData.datasets[1].pointColor  = '#00a65a'
-  var barChartOptions                  = {
-    //Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
-    scaleBeginAtZero        : true,
-    //Boolean - Whether grid lines are shown across the chart
-    scaleShowGridLines      : true,
-    //String - Colour of the grid lines
-    scaleGridLineColor      : 'rgba(0,0,0,.05)',
-    //Number - Width of the grid lines
-    scaleGridLineWidth      : 1,
-    //Boolean - Whether to show horizontal lines (except X axis)
-    scaleShowHorizontalLines: true,
-    //Boolean - Whether to show vertical lines (except Y axis)
-    scaleShowVerticalLines  : true,
-    //Boolean - If there is a stroke on each bar
-    barShowStroke           : true,
-    //Number - Pixel width of the bar stroke
-    barStrokeWidth          : 2,
-    //Number - Spacing between each of the X value sets
-    barValueSpacing         : 5,
-    //Number - Spacing between data sets within X values
-    barDatasetSpacing       : 1,
-    //String - A legend template
-    legendTemplate          : '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].fillColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>',
-    //Boolean - whether to make the chart responsive
-    responsive              : true,
-    maintainAspectRatio     : true
-  }
-
-  barChartOptions.datasetFill = false
-  var myChart = barChart.Bar(barChartData, barChartOptions)
-  document.getElementById('legend').innerHTML = myChart.generateLegend();
-});
-</script>
-<script>
-$(function(){
-  $('#select_year').change(function(){
-    window.location.href = 'home.php?year='+$(this).val();
-  });
-});
-</script>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <div class="card h-100">
+            <div class="card-header">
+              <span class="me-2"><i class="fas fa-analytics"></i></span>
+              Area Chart Example
+            </div>
+            <div class="card-body">
+              <canvas class="chart" width="800" height="400"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+  <script src="./js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
+  <script src="./js/jquery-3.5.1.js"></script>
+  <script src="./js/jquery.dataTables.min.js"></script>
+  <script src="./js/dataTables.bootstrap5.min.js"></script>
+  <script src="./js/script.js"></script>
 </body>
+
 </html>
