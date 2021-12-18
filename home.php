@@ -11,6 +11,9 @@
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
   <!-- <link rel="stylesheet" href="dataTables.bootstrap5.min.css" /> -->
   <link rel="stylesheet" href="csshome/style.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
   <title>CitizenV</title>
 </head>
 
@@ -18,13 +21,12 @@
   <!-- top navigation bar -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container-fluid">
-      <a class="navbar-brand me-auto ms-lg-0 ms-3 mt-2 text-uppercase fw-bold " href="#">citizenv</a>
-      
+      <a class="navbar-brand me-auto ms-lg-0 ms-3 mt-2 text-uppercase fw-bold " href="home.php">citizenv</a>
+
       <div class="collapse navbar-collapse" id="topNavBar">
         <form class="d-flex ms-auto my-3 my-lg-0">
           <div class="input-group">
-            <input class="form-control" type="search" 
-                   placeholder="Search" aria-label="Search" />
+            <input class="form-control" type="search" placeholder="Search" aria-label="Search" />
             <button class="btn btn-primary" type="submit">
               <i class="fas fa-search"></i>
             </button>
@@ -54,12 +56,12 @@
       <ul class="navbar-nav">
         <li>
           <div class="text-muted small fw-bold text-uppercase px-3 py-2 ">
-            <!-- px- là padding left, py- là padding top -->
+            <!-- px-, py- là padding  -->
             báo cáo
           </div>
         </li>
         <li>
-          <a href="#" class="nav-link px-4 active">
+          <a href="home.php" class="nav-link px-4 active">
             <span class="me-2"><i class="fas fa-home"></i></span>
             <span>Trang chủ</span>
           </a>
@@ -75,8 +77,8 @@
           </div>
         </li>
         <li>
-          <a class="nav-link px-4 sidebar-link" data-bs-toggle="collapse" href="#layouts">
-            <!-- data-bs-toggle="collapse: Dùng để hiển thị và ẩn nội dung-
+          <a class="nav-link px-4 sidebar-link" data-bs-toggle="collapse" data-toggle="collapse" href="#more">
+            <!-- collapse: Dùng để hiển thị và ẩn nội dung-
                   .collapse ẩn nội dung
                   .collapsing được áp dụng trong quá trình chuyển đổi
                   .collapse.show hiển thị nội dung -->
@@ -88,7 +90,7 @@
               </span>
             </span>
           </a>
-          <div class="collapse multi-collapse" id="layouts">
+          <div class="collapse" id="more">
             <ul class="navbar-nav ps-3">
               <li>
                 <a href="#" class="nav-link px-4">
@@ -213,14 +215,12 @@
     </div>
     </div>
   </main>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
   <script src="./js/bootstrap.bundle.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
   <script src="./js/jquery-3.5.1.js"></script>
   <script src="./js/jquery.dataTables.min.js"></script>
   <script src="./js/dataTables.bootstrap5.min.js"></script>
-  <script src="./js/script.js"></script>
+  <script src="./js/script.js"></script> -->
 </body>
 
 </html>
