@@ -8,7 +8,6 @@ $rs = executeResult($sql);
 foreach($rs as $value){
     $tmp = $value['id'].$value['ma_thon_ban'];
     echo '<option value="'.$tmp.'">'.$value['ten_thon_ban'].'</option>';
-    // echo '<option value="'.$tmp.'">'.$tmp.'</option>';
 }
 
 ?>

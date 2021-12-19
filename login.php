@@ -9,7 +9,7 @@
     } 
 
 
-	if(isset($_POST['login'])){
+	if(!empty($_POST)){
 		$username = $_POST['username'];
 		$password = $_POST['password'];
 		
@@ -49,4 +49,6 @@
 
 	header('location: index.php');
 
+	// var_dump(isset($_POST['login']));
+	// var_dump(!empty($_POST));
 ?>

@@ -44,7 +44,7 @@
           <div class="collapse" id="more">
             <ul class="navbar-nav ps-3">
               <li>
-                <a href="#" class="nav-link px-4">
+                <a href="test.php" class="nav-link px-4">
                   <span class="me-2"><i class="fas fa-qrcode"></i></span>
                   <span>Cấp mã tỉnh</span>
                 </a>
@@ -59,7 +59,7 @@
           </div>
         </li>
         <li>
-          <a href="#" class="nav-link px-4">
+          <a href="citizen.php" class="nav-link px-4">
             <span class="me-2"><i class="fas fa-users"></i></span>
             <span>Công dân</span>
           </a>

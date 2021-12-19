@@ -43,6 +43,11 @@ $rs = executeResult($sql);
         </select>
     </form>
 
+    <form action="" method="get">
+        <input type="text" name="s" class="form-control" placeholder="Nhập số CMND/CCCD">
+        <button>Search</button>
+    </form>
+
     <table>
         <thead>
             <tr>
@@ -58,9 +63,13 @@ $rs = executeResult($sql);
                 <th>Nghề nghiệp</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="bodydata">
             <?php
-                $sql = "SELECT * FROM person";
+                if (isset($_GET['s']) && $_GET['s'] != '') {
+                    $sql = "SELECT * FROM person WHERE cccd LIKE '".$_GET['s']."%'";
+                } else {
+                    $sql = "SELECT * FROM person";
+                }
                 $rs = executeResult($sql);
 
                 foreach($rs as $vl){
@@ -91,6 +100,9 @@ $rs = executeResult($sql);
             $.post("district.php", {"provinceid":provinceId}, function(data) {
                 $("#district").html(data);
             });
+            $.post("citizendata.php", {"makhuvuc":makhuvuc}, function(data) {
+                $("#bodydata").html(data);
+            });
         });
 
         $("#district").change(function(event) {
@@ -99,6 +111,9 @@ $rs = executeResult($sql);
             districtId = val.slice(0, -4);
             $.post("ward.php", {"districtid":districtId}, function(data) {
                 $("#ward").html(data);
+            });
+            $.post("citizendata.php", {"makhuvuc":makhuvuc}, function(data) {
+                $("#bodydata").html(data);
             });
         });
 
@@ -109,11 +124,18 @@ $rs = executeResult($sql);
             $.post("village.php", {"wardid":wardId}, function(data) {
                 $("#village").html(data);
             });
+            $.post("citizendata.php", {"makhuvuc":makhuvuc}, function(data) {
+                $("#bodydata").html(data);
+            });
         });
 
         $("#village").change(function(event) {
-            villageId = $("#ward").val();
+            val = $("#village").val();
             makhuvuc += val.slice(-2);
+            // console.log(makhuvuc);
+            $.post("citizendata.php", {"makhuvuc":makhuvuc}, function(data) {
+                $("#bodydata").html(data);
+            });
         });
     </script>
 </body>

@@ -18,7 +18,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href=""><i class="fa fa-circle-o"></i> Cấp mã tỉnh</a></li>
+            <li><a href="test.php"><i class="fa fa-circle-o"></i> Cấp mã tỉnh</a></li>
             <li><a href=""><i class="fa fa-circle-o"></i> Cấp tài khoản</a></li>
           </ul>
         </li>
