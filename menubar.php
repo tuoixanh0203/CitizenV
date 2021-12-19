@@ -22,7 +22,7 @@
             <li><a href=""><i class="fa fa-circle-o"></i> Cấp tài khoản</a></li>
           </ul>
         </li>
-        <li><a href=""><i class="fa fa-users"></i> <span>Công dân</span></a></li>
+        <li><a href="citizen.php"><i class="fa fa-users"></i> <span>Công dân</span></a></li>
         <li class="header">BẢN IN</li>
         <li><a href=""><i class="fa fa-files-o"></i> <span>Danh sách công dân</span></a></li>
       </ul>

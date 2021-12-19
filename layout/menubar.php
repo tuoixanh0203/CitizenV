@@ -59,7 +59,7 @@
           </div>
         </li>
         <li>
-          <a href="#" class="nav-link px-4">
+          <a href="citizen.php" class="nav-link px-4">
             <span class="me-2"><i class="fas fa-users"></i></span>
             <span>Công dân</span>
           </a>
