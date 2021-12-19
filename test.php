@@ -1,4 +1,14 @@
 <?php
+      include_once 'head.php';
+?>
+<body>
+  <?php
+      include_once 'layout/navbar.php';
+  ?>
+   <?php
+      include_once 'layout/menubar.php';
+  ?>
+<?php
 require_once ('dbhelp.php');
 $sql = "select * from tinh where ma_tinh is null";
 $rs = executeResult($sql);

@@ -8,8 +8,7 @@
   		return strcmp($pwInput, $pwDB)==0;
     } 
 
-
-	if(isset($_POST['login'])){
+	if(!empty($_POST)){
 		$username = $_POST['username'];
 		$password = $_POST['password'];
 		
