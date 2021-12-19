@@ -1,5 +1,5 @@
 <?php
-      include_once 'layout/head.php';
+      include_once 'head.php';
 ?>
 <body>
   <?php
