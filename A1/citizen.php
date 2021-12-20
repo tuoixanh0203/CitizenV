@@ -18,7 +18,7 @@ include_once 'head.php';
     ?>
 
     <main class="mt-4 pt-5">
-        <h3 class="p-2">Citizen</h3>
+        <!-- <h3 class="p-2">Citizen</h3> -->
         <div class="container-fluid card shadow-sm p-3 mb-5 bg-body rounded fs-6">
             <div class="card-header">
                 <form action="">

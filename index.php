@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (isset($_SESSION['a1'])) {
-	header('location: home.php');
+	header('location: A1/home.php');
 	// echo "a1";
 } elseif (isset($_SESSION['a2'])) {
 	header('location:home.php');
