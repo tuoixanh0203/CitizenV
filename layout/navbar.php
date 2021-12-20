@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
   <div class="container-fluid">
-    <a class="navbar-brand me-auto ms-lg-0 ms-3 mt-2 text-uppercase fw-bold " href="home.php">citizenv</a>
+    <a class="navbar-brand me-auto ms-lg-0 ms-3 mt-2 text-uppercase fw-bold bg-white text-success" href="home.php">citizenv</a>
 
     <div class="collapse navbar-collapse" id="topNavBar">
       <form class="d-flex ms-auto my-3 my-lg-0">

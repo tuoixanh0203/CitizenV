@@ -8,7 +8,10 @@
   		return strcmp($pwInput, $pwDB)==0;
     } 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> bb5a3fe407637e2bc1375d45517fd27ececee0a8
 	if(!empty($_POST)){
 		$username = $_POST['username'];
 		$password = $_POST['password'];
