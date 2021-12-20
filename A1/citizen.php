@@ -6,15 +6,15 @@ $rs = executeResult($sql);
 ?>
 
 <?php
-include_once 'head.php';
+// include_once 'head.php';
 ?>
 
 <body>
     <?php
-    include_once 'layout/navbar.php';
+    // include_once 'layout/navbar.php';
     ?>
     <?php
-    include_once 'layout/menubar.php';
+    // include_once 'layout/menubar.php';
     ?>
 
     <main class="mt-4 pt-5">
@@ -44,7 +44,6 @@ include_once 'head.php';
                         <option value="">--Chọn phường/xã--</option>
                     </select>
 
-<<<<<<< HEAD:A1/citizen.php
     <form action="" method="get">
         <input type="text" name="s" class="form-control" placeholder="Tìm kiếm theo số CMND/CCCD hoặc tên">
         <button>Search</button>
@@ -73,35 +72,6 @@ include_once 'head.php';
                     $sql = "SELECT * FROM person";
                 }
                 $rs = executeResult($sql);
-=======
-                    <label for="village">Thôn/Bản</label>
-                    <select id="village" name="village">
-                        <option value="">--Chọn thôn/bản--</option>
-                    </select>
-                </form>
-            </div>
-            <div class="card-body shadow-sm p-3 mb-5 bg-body rounded">
-                <table class="table table-bordered table-responsive table-hover text-start" style="font-family: 'Source Sans Pro','Helvetica Neue',Helvetica,Arial,sans-serif;
-                            font-weight: 400;">
-                    <thead class="table-success">
-                        <tr>
-                            <th>Số CCCD/CMND</th>
-                            <th>Họ và tên</th>
-                            <th>Ngày sinh</th>
-                            <th>Giới tính</th>
-                            <th>Quê quán</th>
-                            <th>Thường trú</th>
-                            <th>Tạm trú</th>
-                            <th>Tôn giáo</th>
-                            <th>Trình độ VH</th>
-                            <th>Nghề nghiệp</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        $sql = "SELECT * FROM person";
-                        $rs = executeResult($sql);
->>>>>>> bb5a3fe407637e2bc1375d45517fd27ececee0a8:citizen.php
 
                         foreach ($rs as $vl) {
                             echo '<tr>
@@ -121,7 +91,6 @@ include_once 'head.php';
                     </tbody>
                 </table>
 
-<<<<<<< HEAD:A1/citizen.php
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
         makhuvuc = '';
@@ -170,52 +139,6 @@ include_once 'head.php';
             });
         });
     </script>
-=======
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-                <script>
-                    makhuvuc = '';
-                    $("#province").change(function(event) {
-                        val = $("#province").val();
-                        makhuvuc += val.slice(-2);
-                        provinceId = val.slice(0, -2);
-                        $.post("district.php", {
-                            "provinceid": provinceId
-                        }, function(data) {
-                            $("#district").html(data);
-                        });
-                    });
-
-                    $("#district").change(function(event) {
-                        val = $("#district").val();
-                        makhuvuc += val.slice(-2);
-                        districtId = val.slice(0, -4);
-                        $.post("ward.php", {
-                            "districtid": districtId
-                        }, function(data) {
-                            $("#ward").html(data);
-                        });
-                    });
-
-                    $("#ward").change(function(event) {
-                        val = $("#ward").val();
-                        makhuvuc += val.slice(-2);
-                        wardId = val.slice(0, -6);
-                        $.post("village.php", {
-                            "wardid": wardId
-                        }, function(data) {
-                            $("#village").html(data);
-                        });
-                    });
-
-                    $("#village").change(function(event) {
-                        villageId = $("#ward").val();
-                        makhuvuc += val.slice(-2);
-                    });
-                </script>
-            </div>
-        </div>
-    </main>
->>>>>>> bb5a3fe407637e2bc1375d45517fd27ececee0a8:citizen.php
 </body>
 
 </html>

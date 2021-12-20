@@ -6,19 +6,6 @@ require_once ('dbhelp.php');
     $rs = executeResult($sql);
 
     foreach($rs as $vl){
-        // echo '<tr>
-        //         <td>'.$vl['cccd'].'</td>
-        //         <td>'.$vl['ho_ten'].'</td>
-        //         <td>'.$vl['ngay_sinh'].'</td>
-        //         <td>'.$vl['gioi_tinh'].'</td>
-        //         <td>'.$vl['que_quan'].'</td>
-        //         <td>'.$vl['thuong_tru'].'</td>
-        //         <td>'.$vl['tam_tru'].'</td>
-        //         <td>'.$vl['ton_giao'].'</td>
-        //         <td>'.$vl['hoc_van'].'</td>
-        //         <td>'.$vl['nghe_nghiep'].'</td>
-        //     </tr>';
-
         echo '<tr>
             <td>'.$_POST['makhuvuc'].'</td>
             <td>'.$vl['ho_ten'].'</td>
