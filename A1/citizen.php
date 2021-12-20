@@ -6,15 +6,15 @@ $rs = executeResult($sql);
 ?>
 
 <?php
-// include_once 'head.php';
+include_once 'head.php';
 ?>
 
 <body>
     <?php
-    // include_once 'layout/navbar.php';
+    include_once 'layout/navbar.php';
     ?>
     <?php
-    // include_once 'layout/menubar.php';
+    include_once 'layout/menubar.php';
     ?>
 
     <main class="mt-4 pt-5">
@@ -43,6 +43,11 @@ $rs = executeResult($sql);
                     <select id="ward" name="ward">
                         <option value="">--Chọn phường/xã--</option>
                     </select>
+                    <label for="village">Thôn/Bản</label>
+                    <select id="village" name="village">
+                        <option value="">--Chọn thôn/bản--</option>
+                    </select>
+                </form>
 
     <form action="" method="get">
         <input type="text" name="s" class="form-control" placeholder="Tìm kiếm theo số CMND/CCCD hoặc tên">
