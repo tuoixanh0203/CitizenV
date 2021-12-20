@@ -44,13 +44,13 @@
           <div class="collapse" id="more">
             <ul class="navbar-nav ps-3">
               <li>
-                <a href="test.php" class="nav-link px-4">
+                <a href="A1/test.php" class="nav-link px-4">
                   <span class="me-2"><i class="fas fa-qrcode"></i></span>
                   <span>Cấp mã tỉnh</span>
                 </a>
               </li>
               <li>
-                <a href="#" class="nav-link px-4">
+                <a href="A1/createA2.php" class="nav-link px-4">
                   <span class="me-2"><i class="fas fa-users-cog"></i></span>
                   <span>Cấp tài khoản</span>
                 </a>
@@ -59,7 +59,7 @@
           </div>
         </li>
         <li>
-          <a href="citizen.php" class="nav-link px-4">
+          <a href="A1/citizen.php" class="nav-link px-4">
             <span class="me-2"><i class="fas fa-users"></i></span>
             <span>Công dân</span>
           </a>

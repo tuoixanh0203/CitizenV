@@ -44,7 +44,7 @@ $rs = executeResult($sql);
     </form>
 
     <form action="" method="get">
-        <input type="text" name="s" class="form-control" placeholder="Nhập số CMND/CCCD">
+        <input type="text" name="s" class="form-control" placeholder="Tìm kiếm theo số CMND/CCCD hoặc tên">
         <button>Search</button>
     </form>
 
@@ -66,7 +66,7 @@ $rs = executeResult($sql);
         <tbody id="bodydata">
             <?php
                 if (isset($_GET['s']) && $_GET['s'] != '') {
-                    $sql = "SELECT * FROM person WHERE cccd LIKE '".$_GET['s']."%'";
+                    $sql = "SELECT * FROM person WHERE cccd LIKE '".$_GET['s']."%' OR ho_ten LIKE '%".$_GET['s']."%'";
                 } else {
                     $sql = "SELECT * FROM person";
                 }
