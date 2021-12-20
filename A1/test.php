@@ -16,9 +16,6 @@ if(!empty($_POST)) {
         $maTinh = $_POST['maTinh'];
     }
 
-    // echo $tenTinh;
-    // echo $maTinh;
-
     $sql = "UPDATE tinh SET ma_tinh='$maTinh' WHERE ten_tinh = '$tenTinh'";
     execute($sql);
     header("Refresh:0");
