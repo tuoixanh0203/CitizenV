@@ -16,7 +16,6 @@ include_once 'head.php';
     <?php
     include_once 'layout/menubar.php';
     ?>
-
     <main class="mt-4 pt-5">
         <!-- <h3 class="p-2">Citizen</h3> -->
         <div class="container-fluid card shadow-sm p-3 mb-5 bg-body rounded fs-6">
@@ -33,7 +32,6 @@ include_once 'head.php';
                         }
                         ?>
                     </select>
-
                     <label for="district">Quận/Huyện</label>
                     <select id="district" name="district">
                         <option value="">--Chọn quận/huyện--</option>
@@ -48,8 +46,6 @@ include_once 'head.php';
                         <option value="">--Chọn thôn/bản--</option>
                     </select>
                 </form>
-
-
             </div>
             <div class="card-body shadow-sm p-3 mb-5 bg-body rounded">
                 <form action="" method="get" class="d-flex ms-auto  justify-content-end  py-2">
