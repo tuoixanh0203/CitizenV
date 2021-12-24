@@ -1,4 +1,7 @@
 <?php
+session_start();
+?>
+<?php 
 require_once ('dbhelp.php');
 $username = $password = $time_start = $time_end = "";
 
@@ -14,6 +17,7 @@ if(!empty($_POST)){
 
     // echo $username;
     // echo $password;
+    $_SESSION['success'] = 'Create Success';
     $sql = "INSERT INTO users(username, password, role, start, end) VALUES ('".$username."','".$password."',2,'".$time_start."','".$time_end."')";
     // echo $sql;
     execute($sql);

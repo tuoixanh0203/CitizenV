@@ -1,3 +1,6 @@
+<?php 
+session_start(); 
+?>
 <?php
 require_once ('dbhelp.php');
 $username = $time_start = $time_end = "";
@@ -17,6 +20,7 @@ if(!empty($_POST)){
     $sql = "UPDATE users SET start='$time_start',end='$time_end' WHERE username = '$username'";
     // echo $sql;
     execute($sql);
+    $_SESSION['success'] = 'Edit Success';
 }
 
 header('location: createA2.php');

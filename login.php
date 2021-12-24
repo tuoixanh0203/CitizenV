@@ -2,15 +2,13 @@
 	session_start();
 	// require_once ('dbhelp.php');
 	include 'conn.php';
-
-
 	function password_verify_custom($pwInput, $pwDB) {
   		return strcmp($pwInput, $pwDB)==0;
     } 
 
 	if(!empty($_POST)){
 		$username = $_POST['username'];
-		$password = $_POST['password'];
+		$password = md5($_POST['password']);
 		
 
 		$sql = "SELECT * FROM users WHERE username = '$username'";

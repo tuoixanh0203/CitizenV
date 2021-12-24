@@ -24,7 +24,7 @@
             </a>
           </li>
           <li>
-            <a href="logout.php" class=" px-4 dropdown-item">
+            <a href="http://localhost/CitizenV/logout.php" class=" px-4 dropdown-item">
               <span class="me-2"><i class="fas fa-sign-out-alt"></i></span>
               <span>Sign out</a></span>
             </a>
