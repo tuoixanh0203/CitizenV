@@ -15,9 +15,7 @@ include_once 'head.php';
     <main class="mt-4 pt-5">
         <!-- <h3 class="p-2">Citizen</h3> -->
         <div class="container-fluid card shadow-sm p-3 mb-5 bg-body rounded fs-6">
-            <div class="card-header">
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addA2"> New</button>
-            </div>
+            
             <section class="content">
                 <?php
                 if (isset($_SESSION['success'])) {
@@ -25,12 +23,13 @@ include_once 'head.php';
                         <div class='alert alert-success alert-dismissible fade show' role='alert'>
                         <h4><i class='icon fas fa-check'></i> Success!</h4> " . $_SESSION['success'] . "
                         <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
-                    </div>
-            
-          ";
+                    </div>";
                     unset($_SESSION['success']);
                 }
                 ?>
+                <div class="card-header">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addA2"> New</button>
+                </div>
                 <div class="card-body shadow-sm p-3 mb-5 bg-body rounded">
 
                     <table class="table table-bordered table-responsive table-hover text-start" style="font-family: 'Source Sans Pro','Helvetica Neue',Helvetica,Arial,sans-serif;
@@ -103,6 +102,7 @@ include_once 'head.php';
                         }
                     </script>
                 </div>
+            </section>
         </div>
     </main>
 

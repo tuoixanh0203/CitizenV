@@ -21,9 +21,17 @@ foreach($qr as $value){
     <title>Document</title>
 </head>
 <body>
-    <button type="button" class="btn btn-primary khai_bao" data-bs-toggle="modal" data-bs-target="#addA3">
-    New
-    </button>
+    <?php
+        if (isset($_SESSION['success'])) {
+            echo "
+                <div class='alert alert-success alert-dismissible fade show' role='alert'>
+                <h4><i class='icon fas fa-check'></i> Success!</h4> " . $_SESSION['success'] . "
+                <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                </div>";
+                unset($_SESSION['success']);
+        }
+    ?>
+    <button type="button" class="btn btn-primary khai_bao" data-bs-toggle="modal" data-bs-target="#addA3">New</button>
 
     <table>
         <thead>
@@ -63,23 +71,25 @@ $(function(){
     $('.khai_bao').click(function(e){
         e.preventDefault();
         if(!<?php echo $enable; ?>) {
-            alert("Ngoài thời hạn khai báo");
-            // return;
+            // alert("Ngoài thời hạn khai báo");
+            <?php $_SESSION['success'] = 'Ngoài thời hạn khai báo!'; ?>
             location.reload();
+        } else {
+            $('.edit').click(function(e){
+                e.preventDefault();
+                $('#editA3').modal('show');
+                var ma_quan_huyen = $(this).data('id');
+                getData(ma_quan_huyen);
+            });
+            $('.delete').click(function(e){
+                e.preventDefault();
+                $('#deleteA3').modal('show');
+                var ma_quan_huyen = $(this).data('id');
+                getData(ma_quan_huyen);
+            });
         }
     });
-    $('.edit').click(function(e){
-        e.preventDefault();
-        $('#editA3').modal('show');
-        var ma_quan_huyen = $(this).data('id');
-        getData(ma_quan_huyen);
-    });
-    $('.delete').click(function(e){
-        e.preventDefault();
-        $('#deleteA3').modal('show');
-        var ma_quan_huyen = $(this).data('id');
-        getData(ma_quan_huyen);
-    });
+    
 });
 
 function getData(ma_quan_huyen){

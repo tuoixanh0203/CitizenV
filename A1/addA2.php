@@ -1,8 +1,6 @@
-<?php
-session_start();
-?>
 <?php 
 require_once ('dbhelp.php');
+session_start();
 $username = $password = $time_start = $time_end = "";
 
 if(!empty($_POST)){
