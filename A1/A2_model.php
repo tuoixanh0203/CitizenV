@@ -10,10 +10,10 @@
         </div>
         <!-- Modal body -->
         <div class="modal-body">
-            <div>
-                <label for="">Username:</label>
-                <select required="true" id="username" name="username">
-                    <option value="">--Chọn tỉnh--</option>
+            <div class="row mb-2">
+                <label for="" class="col-sm-6 col-form-label">Username:</label>
+                <select required="true" id="username" name="username" class="col-sm-5">
+                    <option value="" >--Chọn tỉnh--</option>
                     <?php
                         require_once ('dbhelp.php');
                         $sql = "select * from tinh where ma_tinh is not null and ma_tinh not in (SELECT username FROM users)";
@@ -25,17 +25,17 @@
                     ?>
                 </select>
             </div>
-            <div>
-                <label for="password">Mật khẩu:</label>
-                <input required="true" type="password" id="password" name="password">
+            <div class="row mb-2">
+                <label for="password" class="col-sm-6 col-form-label">Mật khẩu:</label>
+                <input required="true" type="password" id="password" name="password" class="col-sm-5">
             </div>
-            <div>
-                <label for="time_start">Thời gian bắt đầu khai báo:</label>
-                <input type="date" id="time_start" name="time_start">
+            <div class="row mb-2">
+                <label for="time_start" class="col-sm-6 col-form-label">Thời gian bắt đầu khai báo:</label>
+                <input type="date" id="time_start" name="time_start" class="col-sm-5">
             </div>
-            <div>
-                <label for="time_end">Thời gian kết thúc khai báo:</label>
-                <input type="date" id="time_end" name="time_end">
+            <div class="row mb-2">
+                <label for="time_end" class="col-sm-6 col-form-label">Thời gian kết thúc khai báo:</label>
+                <input type="date" id="time_end" name="time_end" class="col-sm-5">
             </div>
         </div>
         <!-- Modal footer -->
@@ -61,19 +61,19 @@
         </div>
         <!-- Modal body -->
         <div class="modal-body">
-            <div>
-                <label for="username">Username:</label>
-                <select required="true" id="edit_username" name="username">
+            <div class="row mb-2">
+                <label for="username" class="col-sm-6 col-form-label">Username:</label>
+                <select required="true" id="edit_username" name="username" class="col-sm-5">
                     <option id="username_val"></option>
                 </select>
             </div>
-            <div>
-                <label for="time_start">Thời gian bắt đầu khai báo:</label>
-                <input type="date" id="edit_time_start" name="time_start">
+            <div class="row mb-2">
+                <label for="time_start" class="col-sm-6 col-form-label">Thời gian bắt đầu khai báo:</label>
+                <input type="date" id="edit_time_start" name="time_start" class="col-sm-5">
             </div>
-            <div>
-                <label for="time_end">Thời gian kết thúc khai báo:</label>
-                <input type="date" id="edit_time_end" name="time_end">
+            <div class="row mb-2">
+                <label for="time_end" class="col-sm-6 col-form-label">Thời gian kết thúc khai báo:</label>
+                <input type="date" id="edit_time_end" name="time_end" class="col-sm-5">
             </div>
         </div>
         <!-- Modal footer -->
@@ -100,7 +100,7 @@
         <!-- Modal body -->
         <div class="modal-body">
             <div>
-                <label for="username">Bạn có chắc muốn xoá tài khoản này không?</label>
+                <label for="username" >Bạn có chắc muốn xoá tài khoản này không?</label>
                 <select required="true" id="edit_username" name="username">
                     <option id="del_username_val"></option>
                 </select>

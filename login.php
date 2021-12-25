@@ -2,8 +2,6 @@
 	session_start();
 	// require_once ('dbhelp.php');
 	include 'conn.php';
-
-
 	function password_verify_custom($pwInput, $pwDB) {
   		return strcmp($pwInput, $pwDB)==0;
     } 
