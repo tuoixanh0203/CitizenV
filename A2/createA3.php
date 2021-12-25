@@ -31,7 +31,7 @@ foreach($qr as $value){
                 unset($_SESSION['success']);
         }
     ?>
-    <button type="button" class="btn btn-primary khai_bao" data-bs-toggle="modal" data-bs-target="#addA3">New</button>
+    <button type="button" class="btn btn-primary khai_bao add">New</button>
 
     <table>
         <thead>
@@ -74,22 +74,24 @@ $(function(){
             // alert("Ngoài thời hạn khai báo");
             <?php $_SESSION['success'] = 'Ngoài thời hạn khai báo!'; ?>
             location.reload();
-        } else {
-            $('.edit').click(function(e){
-                e.preventDefault();
-                $('#editA3').modal('show');
-                var ma_quan_huyen = $(this).data('id');
-                getData(ma_quan_huyen);
-            });
-            $('.delete').click(function(e){
-                e.preventDefault();
-                $('#deleteA3').modal('show');
-                var ma_quan_huyen = $(this).data('id');
-                getData(ma_quan_huyen);
-            });
         }
     });
-    
+    $('.add').click(function(e){
+        e.preventDefault();
+        $('#addA3').modal('show');
+    });
+    $('.edit').click(function(e){
+        e.preventDefault();
+        $('#editA3').modal('show');
+        var ma_quan_huyen = $(this).data('id');
+        getData(ma_quan_huyen);
+    });
+    $('.delete').click(function(e){
+        e.preventDefault();
+        $('#deleteA3').modal('show');
+        var ma_quan_huyen = $(this).data('id');
+        getData(ma_quan_huyen);
+    });
 });
 
 function getData(ma_quan_huyen){

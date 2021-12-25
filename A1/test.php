@@ -16,12 +16,10 @@ if (!empty($_POST)) {
         $maTinh = $_POST['maTinh'];
     }
 
-    // echo $tenTinh;
-    // echo $maTinh;
-
     $sql = "UPDATE tinh SET ma_tinh='$maTinh' WHERE ten_tinh = '$tenTinh'";
     execute($sql);
-    header("Refresh:0");
+    $_SESSION['success'] = 'Add Success';
+    // header("Refresh:0");
 }
 ?>
 <?php
@@ -38,6 +36,16 @@ include_once 'head.php';
     <main class="mt-4 pt-5">
         <h3 class="p-2">Cấp mã tỉnh</h3>
         <div class="container-fluid card shadow-sm p-3 mb-5 bg-body rounded ">
+            <?php
+                if (isset($_SESSION['success'])) {
+                    echo "
+                        <div class='alert alert-success alert-dismissible fade show' role='alert'>
+                        <h4><i class='icon fas fa-check'></i> Success!</h4> " . $_SESSION['success'] . "
+                        <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                    </div>";
+                    unset($_SESSION['success']);
+                }
+            ?>
             <div class="card-header">
                 <form action="" method="post">
                     <label for="">Tỉnh</label>
@@ -55,18 +63,7 @@ include_once 'head.php';
                     <button>Save</button>
                 </form>
             </div>
-            <?php
-                if (isset($_SESSION['success'])) {
-                    echo "
-                        <div class='alert alert-success alert-dismissible fade show' role='alert'>
-                        <h4><i class='icon fas fa-check'></i> Success!</h4> " . $_SESSION['success'] . "
-                        <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
-                    </div>
             
-          ";
-                    unset($_SESSION['success']);
-                }
-                ?>
             <div class="card-body shadow-sm p-3 mb-5 bg-body rounded">
                 <form class="d-flex ms-auto  justify-content-end  py-1">
                     <div class="row">
