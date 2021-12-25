@@ -14,7 +14,16 @@
 
       <li class="navbar-nav nav-item dropdown">
         <a class="nav-link dropdown-toggle ms-2" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          <i class="fas fa-user"></i>
+        <?php
+        require_once ('dbhelp.php');
+        $sql = "SELECT ten_tinh FROM tinh WHERE ma_tinh = '".$_SESSION['username']."'";
+        $rs = executeResult($sql);
+        foreach($rs as $value){
+            $ten_tinh = $value['ten_tinh'];
+        }
+        echo $ten_tinh;
+        ?>  
+        <i class="fas fa-user"></i>
         </a>
         <ul class="dropdown-menu dropdown-menu-end">
           <li>

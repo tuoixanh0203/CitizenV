@@ -4,7 +4,6 @@ $usn = $_SESSION['username'];
 require_once ('dbhelp.php');
 $sql = "SELECT id FROM tinh WHERE ma_tinh = '".$_SESSION['username']."'";
 $rs = executeResult($sql);
-
 foreach($rs as $value){
     $idT = $value['id'];
 }

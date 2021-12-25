@@ -3,8 +3,6 @@ session_start();
 require_once('dbhelp.php');
 $sql = "select * from tinh where ma_tinh is null";
 $rs = executeResult($sql);
-$sql = "select * from tinh where ma_tinh is not null";
-$rsMaTinh = executeResult($sql);
 
 include_once 'head.php';
 ?>
@@ -48,10 +46,10 @@ include_once 'head.php';
             </div>
             
             <div class="card-body shadow-sm p-3 mb-5 bg-body rounded">
-                <form class="d-flex ms-auto  justify-content-end  py-1">
+                <form class="d-flex ms-auto  justify-content-end  py-1" action="" method="get">
                     <div class="row">
                         <div class="input-group  col-xs-2">
-                            <input class="form-control  mw-20" type="search" placeholder="Search" aria-label="Search" />
+                            <input class="form-control  mw-20" type="text" name="s" placeholder="Search" aria-label="Search" />
                             <button class="btn btn-primary" type="submit">
                                 <i class="fas fa-search"></i>
                             </button>
@@ -67,12 +65,18 @@ include_once 'head.php';
                         </tr>
 
                         <?php
+                        if (isset($_GET['s']) && $_GET['s'] != '') {
+                            $sql = "SELECT * FROM tinh WHERE ten_tinh = '".$_GET['s']."' AND ma_tinh is not null";
+                        } else {
+                            $sql = "select * from tinh where ma_tinh is not null";
+                        }
+                        $rsMaTinh = executeResult($sql);
                         foreach ($rsMaTinh as $vl) {
                             echo '<tr>
-                        <td>' . $vl['ma_tinh'] . '</td>
-                        <td>' . $vl['ten_tinh'] . '</td>
-                        <td><button class="edit" data-id="' . $vl['ma_tinh'] . '">Edit</button> <button class="delete" data-id="' . $vl['ma_tinh'] . '">Delete</button></td>
-                    </tr>';
+                                    <td>' . $vl['ma_tinh'] . '</td>
+                                    <td>' . $vl['ten_tinh'] . '</td>
+                                    <td><button class="edit" data-id="' . $vl['ma_tinh'] . '">Edit</button> <button class="delete" data-id="' . $vl['ma_tinh'] . '">Delete</button></td>
+                                </tr>';
                         }
                         ?>
                     </table>
