@@ -9,27 +9,10 @@ foreach($rs as $value){
     $idX = $value['id'];
 }
 
-$sql = "select * from thon_ban where ma_thon_ban is not null and id_phuong_xa = $idX";
-$rsMaThon = executeResult($sql);
-
 $sql = "SELECT enable FROM users WHERE username = '$usn'";
 $qr = executeResult($sql);
 foreach($qr as $value){
     $enable = $value['enable'];
-}
-
-if(!empty($_POST)) {
-    if(isset($_POST['tenThon'])) {
-        $tenThon = $_POST['tenThon'];
-    }
-
-    if(isset($_POST['maThon'])) {
-        $maThon = $_POST['maThon'];
-    }
-
-    $sql = "INSERT INTO thon_ban(ma_thon_ban, ten_thon_ban, id_phuong_xa) VALUES ('$maThon','$tenThon', $idX)";
-    execute($sql);
-    header("Refresh:0");
 }
 
 ?>
@@ -46,13 +29,24 @@ if(!empty($_POST)) {
     <title>Document</title>
 </head>
 <body>
-    <form action="" method="post">
-        <label for="">Thôn/Bản</label>
-        <input required="true" type="text" id="tenThon" name="tenThon">
-        <label for="">Mã:</label>
-        <input required="true" type="text" id="maThon" name="maThon" placeholder="<?php echo $_SESSION['username']; ?>xx">
-        <button class="khai_bao">Save</button> 
-    </form>
+            <?php
+                if (isset($_SESSION['success'])) {
+                    echo "
+                        <div class='alert alert-success alert-dismissible fade show' role='alert'>
+                        <h4><i class='icon fas fa-check'></i> Success!</h4> " . $_SESSION['success'] . "
+                        <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                    </div>";
+                    unset($_SESSION['success']);
+                }
+            ?>
+
+                <form action="addMaThon.php" method="post">
+                    <label for="">Thôn/Bản</label>
+                    <input required="true" type="text" id="tenThon" name="tenThon">
+                    <label for="">Mã:</label>
+                    <input required="true" type="text" id="maThon" name="maThon" placeholder="<?php echo $_SESSION['username']; ?>xx">
+                    <button>Save</button>
+                </form>
 
     <div>
         <table>
@@ -64,6 +58,8 @@ if(!empty($_POST)) {
             </tr>
             
 <?php
+$sql = "select * from thon_ban where ma_thon_ban is not null and id_phuong_xa = $idX";
+$rsMaThon = executeResult($sql);
 
 foreach($rsMaThon as $vl) {
     echo '<tr>

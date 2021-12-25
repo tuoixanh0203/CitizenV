@@ -20,9 +20,17 @@ foreach($qr as $value){
     <title>Document</title>
 </head>
 <body>
-    <button type="button" class="btn btn-primary khai_bao" data-bs-toggle="modal" data-bs-target="#addB2">
-    New
-    </button>
+    <?php
+        if (isset($_SESSION['success'])) {
+            echo "
+                <div class='alert alert-success alert-dismissible fade show' role='alert'>
+                <h4><i class='icon fas fa-check'></i> Success!</h4> " . $_SESSION['success'] . "
+                <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                </div>";
+                unset($_SESSION['success']);
+        }
+    ?>
+    <button type="button" class="btn btn-primary khai_bao add">New</button>
 
     <table>
         <thead>
@@ -66,6 +74,10 @@ $(function(){
             location.reload();
         }
     });
+    $('.add').click(function(e){
+        e.preventDefault();
+        $('#addB2').modal('show');
+    });
     $('.edit').click(function(e){
         e.preventDefault();
         $('#editB2').modal('show');
@@ -87,12 +99,11 @@ function getData(ma_thon_ban){
     data: {ma_thon_ban:ma_thon_ban},
     dataType: 'json',
     success: function(response){
-        $('#username_val').val(response.username).html(response.username);
+        $('#edit_username').val(response.username);
         $('#del_username_val').val(response.username);
         $('#del_username_val').val(response.username).html(response.username);
         $('#edit_time_start').val(response.start);
         $('#edit_time_end').val(response.end);
-        // $('#del_username').html(response.username);
     }
   });
 }

@@ -51,7 +51,17 @@ foreach($qr as $value){
         <button>Search</button>
     </form>
 
-    <button type="button" class="btn btn-primary khai_bao" data-bs-toggle="modal" data-bs-target="#addPerson">New</button>
+    <?php
+        if (isset($_SESSION['success'])) {
+            echo "
+                <div class='alert alert-success alert-dismissible fade show' role='alert'>
+                <h4><i class='icon fas fa-check'></i> Success!</h4> " . $_SESSION['success'] . "
+                <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                </div>";
+                unset($_SESSION['success']);
+        }
+    ?>
+    <button type="button" class="btn btn-primary khai_bao add">New</button>
 
     <table>
         <thead>
@@ -102,39 +112,43 @@ foreach($qr as $value){
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
         $(function(){
-            $('.khai_bao').click(function(e){
-                e.preventDefault();
-                if(!<?php echo $enable; ?>) {
-                    alert("Ngoài thời hạn khai báo");
-                    location.reload();
-                }
+        $('.khai_bao').click(function(e){
+            e.preventDefault();
+            if(!<?php echo $enable; ?>) {
+                alert("Ngoài thời hạn khai báo");
+                location.reload();
+            }
+        });
+        $('.add').click(function(e){
+            e.preventDefault();
+            $('#addPerson').modal('show');
+        });
+        $('.edit').click(function(e){
+            e.preventDefault();
+            $('#editPerson').modal('show');
+            var id = $(this).data('id');
+            getData(id);
+        });
+        $('.delete').click(function(e){
+            e.preventDefault();
+            $('#deletePerson').modal('show');
+            var id = $(this).data('id');
+            getData(id);
+        });
+        $("#village").change(function(event) {
+            makhuvuc = '';
+            val = $("#village").val();
+            makhuvuc += val.slice(-8);
+            $.post("citizendata.php", {"makhuvuc":makhuvuc}, function(data) {
+                $("#bodydata").html(data);
             });
-            $('.edit').click(function(e){
-                e.preventDefault();
-                $('#editPerson').modal('show');
-                var id = $(this).data('id');
-                getData(id);
-            });
-            $('.delete').click(function(e){
-                e.preventDefault();
-                $('#deletePerson').modal('show');
-                var id = $(this).data('id');
-                getData(id);
-            });
-            $("#village").change(function(event) {
-                makhuvuc = '';
-                val = $("#village").val();
-                makhuvuc += val.slice(-8);
-                $.post("citizendata.php", {"makhuvuc":makhuvuc}, function(data) {
-                    $("#bodydata").html(data);
-                });
-            });
+        });
         });
 
         function getData(id){
             $.ajax({
             type: 'POST',
-            url: 'getData.php',
+            url: 'getDataPerson.php',
             data: {id:id},
             dataType: 'json',
             success: function(response){

@@ -74,9 +74,7 @@ foreach($rs as $value){
         <div class="modal-body">
             <div>
                 <label for="username">Username:</label>
-                <select required="true" id="edit_username" name="username">
-                    <option id="username_val"></option>
-                </select>
+                <input type="text" name="username" id="edit_username" readonly>
             </div>
             <div>
                 <label for="time_start">Thời gian bắt đầu khai báo:</label>

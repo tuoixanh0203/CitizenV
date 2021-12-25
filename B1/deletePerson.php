@@ -9,6 +9,7 @@ if(!empty($_POST)){
     $sql = "DELETE FROM person WHERE id='$id'";
     // echo $sql;
     execute($sql);
+    $_SESSION['success'] = 'Delete Success';
 }
 
 header('location: citizen.php');

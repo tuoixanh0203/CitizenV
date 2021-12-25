@@ -1,5 +1,6 @@
 <?php
 require_once ('dbhelp.php');
+session_start(); 
 $username = $time_start = $time_end = "";
 
 if(!empty($_POST)){
@@ -11,12 +12,9 @@ if(!empty($_POST)){
         $time_end = $_POST['time_end'];
     }
 
-    // echo $username;
-    // echo $time_start;
-    // echo $time_end;
     $sql = "UPDATE users SET start='$time_start',end='$time_end' WHERE username = '$username'";
-    // echo $sql;
     execute($sql);
+    $_SESSION['success'] = 'Edit Success';
 }
 
 header('location: createA3.php');

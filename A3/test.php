@@ -9,31 +9,13 @@ foreach($rs as $value){
     $idH = $value['id'];
 }
 
-// echo $_SESSION['username'];
 $sql = "select * from phuong_xa where ma_phuong_xa is null and id_quan_huyen = $idH";
 $rs = executeResult($sql);
-
-$sql = "select * from phuong_xa where ma_phuong_xa is not null and id_quan_huyen = $idH";
-$rsMaXa = executeResult($sql);
 
 $sql = "SELECT enable FROM users WHERE username = '$usn'";
 $qr = executeResult($sql);
 foreach($qr as $value){
     $enable = $value['enable'];
-}
-
-if(!empty($_POST)) {
-    if(isset($_POST['tenXa'])) {
-        $tenXa = $_POST['tenXa'];
-    }
-
-    if(isset($_POST['maXa'])) {
-        $maXa = $_POST['maXa'];
-    }
-
-    $sql = "UPDATE phuong_xa SET ma_phuong_xa='$maXa' WHERE ten_phuong_xa = '$tenXa'";
-    execute($sql);
-    header("Refresh:0");
 }
 
 ?>
@@ -50,21 +32,31 @@ if(!empty($_POST)) {
     <title>Document</title>
 </head>
 <body>
-    <form action="" method="post">
-        <label for="">Phường/Xã</label>
-        <select id="tenXa" name="tenXa">
-            <option value="">--Chọn phường/xã--</option>
             <?php
-                foreach($rs as $value){
-                    // var_dump($value['ten_quan_huyen']);
-                    echo '<option value="'.$value['ten_phuong_xa'].'">'.$value['ten_phuong_xa'].'</option>';
+                if (isset($_SESSION['success'])) {
+                    echo "
+                        <div class='alert alert-success alert-dismissible fade show' role='alert'>
+                        <h4><i class='icon fas fa-check'></i> Success!</h4> " . $_SESSION['success'] . "
+                        <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                    </div>";
+                    unset($_SESSION['success']);
                 }
             ?>
-        </select>
-        <label for="">Mã:</label>
-        <input required="true" type="text" id="maXa" name="maXa" placeholder="<?php echo $_SESSION['username']; ?>xx">
-        <button class="khai_bao">Save</button> 
-    </form>
+
+                <form action="addMaXa.php" method="post">
+                    <label for="">Phường/Xã</label>
+                    <select id="tenXa" name="tenXa">
+                        <option value="">--Chọn phường/xã--</option>
+                        <?php
+                        foreach ($rs as $value) {
+                            echo '<option value="' . $value['ten_phuong_xa'] . '">' . $value['ten_phuong_xa'] . '</option>';
+                        }
+                        ?>
+                    </select>
+                    <label for="">Mã:</label>
+                    <input required="true" type="text" id="maXa" name="maXa" placeholder="<?php echo $_SESSION['username']; ?>xx">
+                    <button>Save</button>
+                </form>
 
     <div>
         <table>
@@ -76,6 +68,8 @@ if(!empty($_POST)) {
             </tr>
             
 <?php
+$sql = "select * from phuong_xa where ma_phuong_xa is not null and id_quan_huyen = $idH";
+$rsMaXa = executeResult($sql);
 
 foreach($rsMaXa as $vl) {
     echo '<tr>

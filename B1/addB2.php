@@ -1,5 +1,6 @@
 <?php
 require_once ('dbhelp.php');
+session_start(); 
 $username = $password = $time_start = $time_end = "";
 
 if(!empty($_POST)){
@@ -14,8 +15,8 @@ if(!empty($_POST)){
 
     $sql = "INSERT INTO users(username, password, role, start, end) VALUES ('".$username."','".$password."',5,'".$time_start."','".$time_end."')";
     execute($sql);
+    $_SESSION['success'] = 'Add Success';
 }
-
 header('location: createB2.php');
 
 ?>

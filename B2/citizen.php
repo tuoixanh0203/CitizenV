@@ -36,8 +36,17 @@ foreach($qr as $value){
         <button>Search</button>
     </form>
 
-    <button type="button" class="btn btn-primary khai_bao" data-bs-toggle="modal" data-bs-target="#addPerson">New</button>
-
+    <?php
+        if (isset($_SESSION['success'])) {
+            echo "
+                <div class='alert alert-success alert-dismissible fade show' role='alert'>
+                <h4><i class='icon fas fa-check'></i> Success!</h4> " . $_SESSION['success'] . "
+                <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                </div>";
+                unset($_SESSION['success']);
+        }
+    ?>
+    <button type="button" class="btn btn-primary khai_bao add">New</button>
     <table>
         <thead>
             <tr>
@@ -94,6 +103,10 @@ foreach($qr as $value){
                 alert("Ngoài thời hạn khai báo");
                 location.reload();
             }
+        });
+        $('.add').click(function(e){
+            e.preventDefault();
+            $('#addPerson').modal('show');
         });
         $('.edit').click(function(e){
             e.preventDefault();

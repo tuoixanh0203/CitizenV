@@ -4,37 +4,19 @@ $usn = $_SESSION['username'];
 require_once ('dbhelp.php');
 $sql = "SELECT id FROM tinh WHERE ma_tinh = '".$_SESSION['username']."'";
 $rs = executeResult($sql);
+
 foreach($rs as $value){
     $idT = $value['id'];
 }
 
-// echo $_SESSION['username'];
 $sql = "select * from quan_huyen where ma_quan_huyen is null and id_tinh = $idT";
 $rs = executeResult($sql);
-
-$sql = "select * from quan_huyen where ma_quan_huyen is not null and id_tinh = $idT";
-$rsMaHuyen = executeResult($sql);
 
 $sql = "SELECT enable FROM users WHERE username = '$usn'";
 $qr = executeResult($sql);
 foreach($qr as $value){
     $enable = $value['enable'];
 }
-
-if(!empty($_POST)) {
-    if(isset($_POST['tenHuyen'])) {
-        $tenHuyen = $_POST['tenHuyen'];
-    }
-
-    if(isset($_POST['maHuyen'])) {
-        $maHuyen = $_POST['maHuyen'];
-    }
-
-    $sql = "UPDATE quan_huyen SET ma_quan_huyen='$maHuyen' WHERE ten_quan_huyen = '$tenHuyen'";
-    execute($sql);
-    header("Refresh:0");
-}
-
 ?>
 
 
@@ -49,21 +31,31 @@ if(!empty($_POST)) {
     <title>Document</title>
 </head>
 <body>
-    <form action="" method="post">
-        <label for="">Huyện</label>
-        <select id="tenHuyen" name="tenHuyen">
-            <option value="">--Chọn huyện--</option>
             <?php
-                foreach($rs as $value){
-                    var_dump($value['ten_quan_huyen']);
-                    echo '<option value="'.$value['ten_quan_huyen'].'">'.$value['ten_quan_huyen'].'</option>';
+                if (isset($_SESSION['success'])) {
+                    echo "
+                        <div class='alert alert-success alert-dismissible fade show' role='alert'>
+                        <h4><i class='icon fas fa-check'></i> Success!</h4> " . $_SESSION['success'] . "
+                        <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                    </div>";
+                    unset($_SESSION['success']);
                 }
             ?>
-        </select>
-        <label for="">Mã:</label>
-        <input required="true" type="text" id="maHuyen" name="maHuyen" placeholder="<?php echo $_SESSION['username']; ?>xx">
-        <button class="khai_bao">Save</button> 
-    </form>
+
+                <form action="addMaHuyen.php" method="post">
+                    <label for="">Quận/Huyện</label>
+                    <select id="tenHuyen" name="tenHuyen">
+                        <option value="">--Chọn quận/huyện--</option>
+                        <?php
+                        foreach ($rs as $value) {
+                            echo '<option value="' . $value['ten_quan_huyen'] . '">' . $value['ten_quan_huyen'] . '</option>';
+                        }
+                        ?>
+                    </select>
+                    <label for="">Mã:</label>
+                    <input required="true" type="text" id="maHuyen" name="maHuyen" placeholder="<?php echo $_SESSION['username']; ?>xx">
+                    <button>Save</button>
+                </form>
 
     <div>
         <table>
@@ -75,6 +67,8 @@ if(!empty($_POST)) {
             </tr>
             
 <?php
+$sql = "select * from quan_huyen where ma_quan_huyen is not null and id_tinh = $idT";
+$rsMaHuyen = executeResult($sql);
 
 foreach($rsMaHuyen as $vl) {
     echo '<tr>
@@ -152,7 +146,7 @@ foreach($rsMaHuyen as $vl) {
     $('.khai_bao').click(function(e){
         e.preventDefault();
         if(!<?php echo $enable; ?>) {
-            alert("Ngoài thời hạn khai báo");
+            <?php $_SESSION['success'] = 'Ngoài thời hạn khai báo!'; ?>
             location.reload();
         }
     });

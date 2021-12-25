@@ -20,9 +20,17 @@ foreach($qr as $value){
     <title>Document</title>
 </head>
 <body>
-    <button type="button" class="btn btn-primary khai_bao" data-bs-toggle="modal" data-bs-target="#addB1">
-    New
-    </button>
+    <?php
+        if (isset($_SESSION['success'])) {
+            echo "
+                <div class='alert alert-success alert-dismissible fade show' role='alert'>
+                <h4><i class='icon fas fa-check'></i> Success!</h4> " . $_SESSION['success'] . "
+                <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                </div>";
+                unset($_SESSION['success']);
+        }
+    ?>
+    <button type="button" class="btn btn-primary khai_bao add">New</button>
 
     <table>
         <thead>
@@ -38,7 +46,7 @@ foreach($qr as $value){
         <tbody>
             <?php
                 require_once ('dbhelp.php');
-                $sql = "SELECT * FROM users JOIN phuong_xa on users.username = phuong_xa.ma_phuong_xa AND username LIKE '".$_SESSION['username']."%'";
+                $sql = "SELECT * FROM users JOIN phuong_xa on users.username = phuong_xa.ma_phuong_xa WHERE username LIKE '".$_SESSION['username']."%'";
                 $rs = executeResult($sql);
 
                 foreach($rs as $vl){
@@ -66,6 +74,10 @@ $(function(){
             location.reload();
         }
     });
+    $('.add').click(function(e){
+        e.preventDefault();
+        $('#addB1').modal('show');
+    });
     $('.edit').click(function(e){
         e.preventDefault();
         $('#editB1').modal('show');
@@ -92,7 +104,6 @@ function getData(ma_phuong_xa){
         $('#del_username_val').val(response.username).html(response.username);
         $('#edit_time_start').val(response.start);
         $('#edit_time_end').val(response.end);
-        // $('#del_username').html(response.username);
     }
   });
 }

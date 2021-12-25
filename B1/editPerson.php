@@ -21,6 +21,7 @@ if(!empty($_POST)){
     $sql = "UPDATE person SET cccd='$cccd',ho_ten='$ho_ten',ngay_sinh='$ngay_sinh',gioi_tinh='$gioi_tinh',que_quan='$que_quan',thuong_tru='$thuong_tru',tam_tru='$tam_tru',ton_giao='$ton_giao',hoc_van='$hoc_van',nghe_nghiep='$nghe_nghiep' WHERE id=$id";
     // echo $sql;
     execute($sql);
+    $_SESSION['success'] = 'Edit Success';
 }
 
 header('location: citizen.php');
