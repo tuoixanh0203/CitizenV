@@ -1,28 +1,11 @@
 <?php 
 session_start(); 
-?>
-<?php
 require_once('dbhelp.php');
-// include 'citizenV/dbhelp.php';
 $sql = "select * from tinh where ma_tinh is null";
 $rs = executeResult($sql);
 $sql = "select * from tinh where ma_tinh is not null";
 $rsMaTinh = executeResult($sql);
-if (!empty($_POST)) {
-    if (isset($_POST['tenTinh'])) {
-        $tenTinh = $_POST['tenTinh'];
-    }
-    if (isset($_POST['maTinh'])) {
-        $maTinh = $_POST['maTinh'];
-    }
 
-    $sql = "UPDATE tinh SET ma_tinh='$maTinh' WHERE ten_tinh = '$tenTinh'";
-    execute($sql);
-    $_SESSION['success'] = 'Add Success';
-    // header("Refresh:0");
-}
-?>
-<?php
 include_once 'head.php';
 ?>
 
@@ -47,7 +30,7 @@ include_once 'head.php';
                 }
             ?>
             <div class="card-header">
-                <form action="" method="post">
+                <form action="addMaTinh.php" method="post">
                     <label for="">Tỉnh</label>
                     <select id="tenTinh" name="tenTinh">
                         <option value="">--Chọn tỉnh--</option>
