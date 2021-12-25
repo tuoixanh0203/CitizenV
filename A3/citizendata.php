@@ -7,7 +7,7 @@ require_once ('dbhelp.php');
 
     foreach($rs as $vl){
         echo '<tr>
-            <td>'.$_POST['cccd'].'</td>
+            <td>'.$vl['cccd'].'</td>
             <td>'.$vl['ho_ten'].'</td>
             <td>'.$vl['ngay_sinh'].'</td>
             <td>'.$vl['gioi_tinh'].'</td>

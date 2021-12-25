@@ -14,11 +14,11 @@ if(!empty($_POST)){
 
     // echo $username;
     // echo $password;
-    $sql = "INSERT INTO users(username, password, role, start, end) VALUES ('".$username."','".$password."',2,'".$time_start."','".$time_end."')";
+    $sql = "INSERT INTO users(username, password, role, start, end) VALUES ('".$username."','".$password."',4,'".$time_start."','".$time_end."')";
     // echo $sql;
     execute($sql);
 }
 
-header('location: createA2.php');
+header('location: createB1.php');
 
 ?>

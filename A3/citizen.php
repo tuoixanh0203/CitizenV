@@ -1,20 +1,19 @@
 <?php
 require_once('dbhelp.php');
-$sql = "select * from tinh where ma_tinh is not null";
-$rs = executeResult($sql);
+session_start();
 
 ?>
 
 <?php
-include_once 'head.php';
+// include_once 'head.php';
 ?>
 
 <body>
     <?php
-    include_once 'layout/navbar.php';
+    // include_once 'layout/navbar.php';
     ?>
     <?php
-    include_once 'layout/menubar.php';
+    // include_once 'layout/menubar.php';
     ?>
 
     <main class="mt-4 pt-5">
@@ -22,26 +21,18 @@ include_once 'head.php';
         <div class="container-fluid card shadow-sm p-3 mb-5 bg-body rounded fs-6">
             <div class="card-header">
                 <form action="">
-                    <label for="province">Tỉnh</label>
-                    <select id="province" name="province">
-                        <option value="">--Chọn tỉnh--</option>
-                        <?php
-                        foreach ($rs as $value) {
-                            // var_dump($value['ten_tinh']);
-                            $tmp = $value['id'] . $value['ma_tinh'];
-                            echo '<option value="' . $tmp . '">' . $value['ten_tinh'] . '</option>';
-                        }
-                        ?>
-                    </select>
-
-                    <label for="district">Quận/Huyện</label>
-                    <select id="district" name="district">
-                        <option value="">--Chọn quận/huyện--</option>
-                    </select>
-
-                    <label for="ward">Phường/Xã</label>
+                    <label for="">Phường/Xã</label>
                     <select id="ward" name="ward">
                         <option value="">--Chọn phường/xã--</option>
+                        <?php
+                        $sql = "select * from phuong_xa where ma_phuong_xa is not null and ma_phuong_xa like '".$_SESSION['username']."%'";
+                        $rs = executeResult($sql);
+                        foreach ($rs as $value) {
+                            // var_dump($value['ten_tinh']);
+                            $tmp = $value['id'] . $value['ma_phuong_xa'];
+                            echo '<option value="' . $tmp . '">' . $value['ten_phuong_xa'] . '</option>';
+                        }
+                        ?>
                     </select>
                     <label for="village">Thôn/Bản</label>
                     <select id="village" name="village">
@@ -72,9 +63,9 @@ include_once 'head.php';
         <tbody id="bodydata">
             <?php
                 if (isset($_GET['s']) && $_GET['s'] != '') {
-                    $sql = "SELECT * FROM person WHERE cccd LIKE '".$_GET['s']."%' OR ho_ten LIKE '%".$_GET['s']."%'";
+                    $sql = "SELECT * FROM person WHERE (cccd LIKE '".$_GET['s']."%' OR ho_ten LIKE '%".$_GET['s']."%') AND ma_khu_vuc LIKE '".$_SESSION['username']."%'";
                 } else {
-                    $sql = "SELECT * FROM person";
+                    $sql = "SELECT * FROM person WHERE ma_khu_vuc LIKE '".$_SESSION['username']."%'";
                 }
                 $rs = executeResult($sql);
 
@@ -98,35 +89,14 @@ include_once 'head.php';
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
-        $("#province").change(function(event) {
-            makhuvuc = '';
-            val = $("#province").val();
-            makhuvuc += val.slice(-2);
-            provinceId = val.slice(0, -2);
-            $.post("district.php", {"provinceid":provinceId}, function(data) {
-                $("#district").html(data);
-            });
-            $.post("citizendata.php", {"makhuvuc":makhuvuc}, function(data) {
-                $("#bodydata").html(data);
-            });
-        });
-
-        $("#district").change(function(event) {
-            val = $("#district").val();
-            makhuvuc += val.slice(-2);
-            districtId = val.slice(0, -4);
-            $.post("ward.php", {"districtid":districtId}, function(data) {
-                $("#ward").html(data);
-            });
-            $.post("citizendata.php", {"makhuvuc":makhuvuc}, function(data) {
-                $("#bodydata").html(data);
-            });
-        });
-
         $("#ward").change(function(event) {
+            makhuvuc = '';
             val = $("#ward").val();
-            makhuvuc += val.slice(-2);
+            makhuvuc += val.slice(-6);
             wardId = val.slice(0, -6);
+            console.log(val);
+            console.log(makhuvuc);
+            console.log(wardId);
             $.post("village.php", {"wardid":wardId}, function(data) {
                 $("#village").html(data);
             });

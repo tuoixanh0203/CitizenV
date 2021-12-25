@@ -1,20 +1,19 @@
 <?php
 require_once('dbhelp.php');
-$sql = "select * from tinh where ma_tinh is not null";
-$rs = executeResult($sql);
+session_start();
 
 ?>
 
 <?php
-include_once 'head.php';
+// include_once 'head.php';
 ?>
 
 <body>
     <?php
-    include_once 'layout/navbar.php';
+    // include_once 'layout/navbar.php';
     ?>
     <?php
-    include_once 'layout/menubar.php';
+    // include_once 'layout/menubar.php';
     ?>
 
     <main class="mt-4 pt-5">
@@ -22,22 +21,24 @@ include_once 'head.php';
         <div class="container-fluid card shadow-sm p-3 mb-5 bg-body rounded fs-6">
             <div class="card-header">
                 <form action="">
-                    <label for="province">Tỉnh</label>
-                    <select id="province" name="province">
-                        <option value="">--Chọn tỉnh--</option>
+                    <label for="district">Quận/Huyện</label>
+                    <select id="district" name="district">
+                        <option value="">--Chọn quận/huyện--</option>
                         <?php
+                        $sql = "select * from quan_huyen where ma_quan_huyen is not null and ma_quan_huyen like '".$_SESSION['username']."%'";
+                        $rs = executeResult($sql);
                         foreach ($rs as $value) {
                             // var_dump($value['ten_tinh']);
-                            $tmp = $value['id'] . $value['ma_tinh'];
-                            echo '<option value="' . $tmp . '">' . $value['ten_tinh'] . '</option>';
+                            $tmp = $value['id'] . $value['ma_quan_huyen'];
+                            echo '<option value="' . $tmp . '">' . $value['ten_quan_huyen'] . '</option>';
                         }
                         ?>
                     </select>
 
-                    <label for="district">Quận/Huyện</label>
+                    <!-- <label for="district">Quận/Huyện</label>
                     <select id="district" name="district">
                         <option value="">--Chọn quận/huyện--</option>
-                    </select>
+                    </select> -->
 
                     <label for="ward">Phường/Xã</label>
                     <select id="ward" name="ward">
@@ -72,9 +73,9 @@ include_once 'head.php';
         <tbody id="bodydata">
             <?php
                 if (isset($_GET['s']) && $_GET['s'] != '') {
-                    $sql = "SELECT * FROM person WHERE cccd LIKE '".$_GET['s']."%' OR ho_ten LIKE '%".$_GET['s']."%'";
+                    $sql = "SELECT * FROM person WHERE (cccd LIKE '".$_GET['s']."%' OR ho_ten LIKE '%".$_GET['s']."%') AND ma_khu_vuc LIKE '".$_SESSION['username']."%'";
                 } else {
-                    $sql = "SELECT * FROM person";
+                    $sql = "SELECT * FROM person WHERE ma_khu_vuc LIKE '".$_SESSION['username']."%'";
                 }
                 $rs = executeResult($sql);
 
@@ -98,22 +99,10 @@ include_once 'head.php';
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
-        $("#province").change(function(event) {
-            makhuvuc = '';
-            val = $("#province").val();
-            makhuvuc += val.slice(-2);
-            provinceId = val.slice(0, -2);
-            $.post("district.php", {"provinceid":provinceId}, function(data) {
-                $("#district").html(data);
-            });
-            $.post("citizendata.php", {"makhuvuc":makhuvuc}, function(data) {
-                $("#bodydata").html(data);
-            });
-        });
-
         $("#district").change(function(event) {
+            makhuvuc = '';
             val = $("#district").val();
-            makhuvuc += val.slice(-2);
+            makhuvuc += val.slice(-4);
             districtId = val.slice(0, -4);
             $.post("ward.php", {"districtid":districtId}, function(data) {
                 $("#ward").html(data);

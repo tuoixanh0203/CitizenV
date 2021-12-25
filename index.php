@@ -4,13 +4,17 @@ if (isset($_SESSION['a1'])) {
 	header('location: A1/home.php');
 	// echo "a1";
 } elseif (isset($_SESSION['a2'])) {
-	header('location:home.php');
+	// echo $_SESSION['username'];
+	header('location: A2/home.php');
 } elseif (isset($_SESSION['a3'])) {
-	echo "a3";
+	// echo "a3";
+	header('location: A3/home.php');
 } elseif (isset($_SESSION['b1'])) {
-	echo "b1";
+	header('location: B1/home.php');
+	// echo "b1";
 } elseif (isset($_SESSION['b2'])) {
-	echo "b2";
+	// echo "b2";
+	header('location: B2/home.php');
 }
 ?>
 <?php

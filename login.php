@@ -10,7 +10,7 @@
 
 	if(!empty($_POST)){
 		$username = $_POST['username'];
-		$password = $_POST['password'];
+		$password = md5($_POST['password']);
 		
 
 		$sql = "SELECT * FROM users WHERE username = '$username'";
@@ -23,7 +23,7 @@
 		else{
 			$row = $query->fetch_assoc();
 			if(password_verify_custom($password, $row['password'])){
-				$_SESSION['usn'] = $row['username'];
+				$_SESSION['username'] = $row['username'];
 				if($row['role'] == 1) {
 					$_SESSION['a1'] = $row['username'];
 				} else if($row['role'] == 2) {

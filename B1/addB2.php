@@ -12,13 +12,10 @@ if(!empty($_POST)){
         $time_end = $_POST['time_end'];
     }
 
-    // echo $username;
-    // echo $password;
-    $sql = "INSERT INTO users(username, password, role, start, end) VALUES ('".$username."','".$password."',2,'".$time_start."','".$time_end."')";
-    // echo $sql;
+    $sql = "INSERT INTO users(username, password, role, start, end) VALUES ('".$username."','".$password."',5,'".$time_start."','".$time_end."')";
     execute($sql);
 }
 
-header('location: createA2.php');
+header('location: createB2.php');
 
 ?>
