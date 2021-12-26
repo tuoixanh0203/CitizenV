@@ -10,7 +10,7 @@ foreach($qr as $value){
 ?>
 
 <?php
-// include_once 'head.php';
+// include_once 'head.php'; v
 ?>
 
 <!DOCTYPE html>
