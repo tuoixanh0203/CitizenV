@@ -11,8 +11,10 @@ require_once ('dbhelp.php');
  foreach($rs as $value){
      $totalMale = $value['total'];
  }
- $malePercent = ($totalMale / $totalPerson) * 100;
- $femalePercent = 100 - $malePercent;
+ if($totalPerson > 0) {
+  $malePercent = ($totalMale / $totalPerson) * 100;
+  $femalePercent = 100 - $malePercent;
+ }
 
  $sql = "SELECT COUNT(*) as total FROM person WHERE year(CURRENT_DATE()) - year(ngay_sinh) < 15";
  $rs = executeResult($sql);
@@ -108,7 +110,7 @@ require_once ('dbhelp.php');
               Area Chart Example
             </div>
             <div class="card-body">
-              <div id="myPlot" style="width:100%;max-width:700px"></div>
+              <div id="myPlot"></div>
             </div>
           </div>
         </div>

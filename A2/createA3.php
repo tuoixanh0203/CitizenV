@@ -71,8 +71,7 @@ $(function(){
     $('.khai_bao').click(function(e){
         e.preventDefault();
         if(!<?php echo $enable; ?>) {
-            // alert("Ngoài thời hạn khai báo");
-            <?php $_SESSION['success'] = 'Ngoài thời hạn khai báo!'; ?>
+            alert("Ngoài thời hạn khai báo");
             location.reload();
         }
     });
