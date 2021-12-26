@@ -16,7 +16,6 @@ include_once 'head.php';
     <?php
     include_once 'layout/menubar.php';
     ?>
-
     <main class="mt-4 pt-5">
         <!-- <h3 class="p-2">Citizen</h3> -->
         <div class="container-fluid card shadow-sm p-3 mb-5 bg-body rounded fs-6">
@@ -33,7 +32,6 @@ include_once 'head.php';
                         }
                         ?>
                     </select>
-
                     <label for="district">Quận/Huyện</label>
                     <select id="district" name="district">
                         <option value="">--Chọn quận/huyện--</option>
@@ -48,35 +46,43 @@ include_once 'head.php';
                         <option value="">--Chọn thôn/bản--</option>
                     </select>
                 </form>
+            </div>
+            <div class="card-body shadow-sm p-3 mb-5 bg-body rounded">
+                <form action="" method="get" class="d-flex ms-auto  justify-content-end  py-2">
+                    <div class="row">
+                        <div class="input-group ">
+                            <input type="text" name="s" class="form-control" placeholder="CMND/CCCD hoặc tên">
+                            <button class="btn btn-primary " type="submit">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                <table class="table table-bordered table-responsive table-hover text-start" style="font-family: 'Source Sans Pro','Helvetica Neue',Helvetica,Arial,sans-serif;
+                            font-weight: 400;">
+                    <thead class="table-success">
 
-    <form action="" method="get">
-        <input type="text" name="s" class="form-control" placeholder="Tìm kiếm theo số CMND/CCCD hoặc tên">
-        <button>Search</button>
-    </form>
-
-    <table>
-        <thead>
-            <tr>
-                <th>Số CCCD/CMND</th>
-                <th>Họ và tên</th>
-                <th>Ngày sinh</th>
-                <th>Giới tính</th>
-                <th>Quê quán</th>
-                <th>Địa chỉ thường trú</th>
-                <th>Địa chỉ tạm trú</th>
-                <th>Tôn giáo</th>
-                <th>Trình độ văn hóa</th>
-                <th>Nghề nghiệp</th>
-            </tr>
-        </thead>
-        <tbody id="bodydata">
-            <?php
-                if (isset($_GET['s']) && $_GET['s'] != '') {
-                    $sql = "SELECT * FROM person WHERE cccd LIKE '".$_GET['s']."%' OR ho_ten LIKE '%".$_GET['s']."%'";
-                } else {
-                    $sql = "SELECT * FROM person";
-                }
-                $rs = executeResult($sql);
+                        <tr>
+                            <th>CCCD/CMND</th>
+                            <th>Họ và tên</th>
+                            <th>Ngày sinh</th>
+                            <th>Giới tính</th>
+                            <th>Quê quán</th>
+                            <th>Thường trú</th>
+                            <th>Tạm trú</th>
+                            <th>Tôn giáo</th>
+                            <th>Trình độ VH</th>
+                            <th>Nghề nghiệp</th>
+                        </tr>
+                    </thead>
+                    <tbody id="bodydata">
+                        <?php
+                        if (isset($_GET['s']) && $_GET['s'] != '') {
+                            $sql = "SELECT * FROM person WHERE cccd LIKE '" . $_GET['s'] . "%' OR ho_ten LIKE '%" . $_GET['s'] . "%'";
+                        } else {
+                            $sql = "SELECT * FROM person";
+                        }
+                        $rs = executeResult($sql);
 
                         foreach ($rs as $vl) {
                             echo '<tr>
@@ -96,53 +102,72 @@ include_once 'head.php';
                     </tbody>
                 </table>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script>
-        $("#province").change(function(event) {
-            makhuvuc = '';
-            val = $("#province").val();
-            makhuvuc += val.slice(-2);
-            provinceId = val.slice(0, -2);
-            $.post("district.php", {"provinceid":provinceId}, function(data) {
-                $("#district").html(data);
-            });
-            $.post("citizendata.php", {"makhuvuc":makhuvuc}, function(data) {
-                $("#bodydata").html(data);
-            });
-        });
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+                <script>
+                    makhuvuc = '';
+                    $("#province").change(function(event) {
+                        val = $("#province").val();
+                        makhuvuc += val.slice(-2);
+                        provinceId = val.slice(0, -2);
+                        $.post("district.php", {
+                            "provinceid": provinceId
+                        }, function(data) {
+                            $("#district").html(data);
+                        });
+                        $.post("citizendata.php", {
+                            "makhuvuc": makhuvuc
+                        }, function(data) {
+                            $("#bodydata").html(data);
+                        });
+                    });
 
-        $("#district").change(function(event) {
-            val = $("#district").val();
-            makhuvuc += val.slice(-2);
-            districtId = val.slice(0, -4);
-            $.post("ward.php", {"districtid":districtId}, function(data) {
-                $("#ward").html(data);
-            });
-            $.post("citizendata.php", {"makhuvuc":makhuvuc}, function(data) {
-                $("#bodydata").html(data);
-            });
-        });
+                    $("#district").change(function(event) {
+                        val = $("#district").val();
+                        makhuvuc += val.slice(-2);
+                        districtId = val.slice(0, -4);
+                        $.post("ward.php", {
+                            "districtid": districtId
+                        }, function(data) {
+                            $("#ward").html(data);
+                        });
+                        $.post("citizendata.php", {
+                            "makhuvuc": makhuvuc
+                        }, function(data) {
+                            $("#bodydata").html(data);
+                        });
+                    });
 
-        $("#ward").change(function(event) {
-            val = $("#ward").val();
-            makhuvuc += val.slice(-2);
-            wardId = val.slice(0, -6);
-            $.post("village.php", {"wardid":wardId}, function(data) {
-                $("#village").html(data);
-            });
-            $.post("citizendata.php", {"makhuvuc":makhuvuc}, function(data) {
-                $("#bodydata").html(data);
-            });
-        });
+                    $("#ward").change(function(event) {
+                        val = $("#ward").val();
+                        makhuvuc += val.slice(-2);
+                        wardId = val.slice(0, -6);
+                        $.post("village.php", {
+                            "wardid": wardId
+                        }, function(data) {
+                            $("#village").html(data);
+                        });
+                        $.post("citizendata.php", {
+                            "makhuvuc": makhuvuc
+                        }, function(data) {
+                            $("#bodydata").html(data);
+                        });
+                    });
 
-        $("#village").change(function(event) {
-            val = $("#village").val();
-            makhuvuc += val.slice(-2);
-            $.post("citizendata.php", {"makhuvuc":makhuvuc}, function(data) {
-                $("#bodydata").html(data);
-            });
-        });
-    </script>
+                    $("#village").change(function(event) {
+                        val = $("#village").val();
+                        makhuvuc += val.slice(-2);
+                        // console.log(makhuvuc);
+                        $.post("citizendata.php", {
+                            "makhuvuc": makhuvuc
+                        }, function(data) {
+                            $("#bodydata").html(data);
+                        });
+                    });
+                </script>
+
+            </div>
+        </div>
+    </main>
 </body>
 
 </html>
