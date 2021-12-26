@@ -30,6 +30,9 @@ foreach($qr as $value){
     <?php
     // include_once 'layout/menubar.php';
     ?>
+    <form action="updateStatus.php">
+        <button></button>
+    </form>
 
     <form action="">
         <label for="">Thôn/Bản</label>
