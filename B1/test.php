@@ -39,12 +39,11 @@ foreach($qr as $value){
                     unset($_SESSION['success']);
                 }
             ?>
-
                 <form action="addMaThon.php" method="post">
                     <label for="">Thôn/Bản</label>
                     <input required="true" type="text" id="tenThon" name="tenThon">
-                    <label for="">Mã:</label>
-                    <input required="true" type="text" id="maThon" name="maThon" placeholder="<?php echo $_SESSION['username']; ?>xx">
+                    <label for="cars">Mã:</label>
+                    <input required="true" type="text" id="maThon" name="maThon" placeholder="<?php echo $usn; ?>xx">
                     <button class="khai_bao">Save</button>
                 </form>
 
@@ -135,7 +134,7 @@ foreach($rsMaThon as $vl) {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script type="text/javascript">
     $('.khai_bao').click(function(e){
-        e.preventDefault();
+        // e.preventDefault();
         if(!<?php echo $enable; ?>) {
             // console.log("false");
             alert("Ngoài thời hạn khai báo");

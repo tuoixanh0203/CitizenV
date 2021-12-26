@@ -13,7 +13,7 @@
         </a>
         <ul class="dropdown-menu dropdown-menu-end">
           <li>
-            <a href="" class=" px-4 dropdown-item">
+            <a href="http://localhost/CitizenV/A1/changepw.php" class=" px-4 dropdown-item">
               <span class="me-2"><i class="fas fa-user-edit"></i></span>
               <span>Update</a></span>
             </a>

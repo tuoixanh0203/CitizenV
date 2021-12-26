@@ -53,8 +53,8 @@ foreach($qr as $value){
                         }
                         ?>
                     </select>
-                    <label for="">Mã:</label>
-                    <input required="true" type="text" id="maXa" name="maXa" placeholder="<?php echo $_SESSION['username']; ?>xx">
+                    <label for="cars">Mã:</label>
+                    <input required="true" type="text" id="maXa" name="maXa" placeholder="<?php echo $usn; ?>xx">
                     <button class="khai_bao">Save</button>
                 </form>
 
@@ -148,7 +148,7 @@ foreach($rsMaXa as $vl) {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script type="text/javascript">
     $('.khai_bao').click(function(e){
-        e.preventDefault();
+        // e.preventDefault();
         if(!<?php echo $enable; ?>) {
             alert("Ngoài thời hạn khai báo");
             location.reload();

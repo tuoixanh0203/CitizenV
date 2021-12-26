@@ -16,5 +16,6 @@ if(!empty($_POST)) {
     $_SESSION['success'] = 'Add Success';
 }
 header('location: test.php');
+// echo empty(!$_POST);
 
 ?>

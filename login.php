@@ -7,8 +7,12 @@
     } 
 
 	if(!empty($_POST)){
+		// $username = $_POST['username'];
+		// $password = md5($_POST['password']);
 		$username = $_POST['username'];
+		// $_SESSION['username'] = $row['username'];
 		$password = md5($_POST['password']);
+		$_SESSION['password'] = $password;
 		
 
 		$sql = "SELECT * FROM users WHERE username = '$username'";
