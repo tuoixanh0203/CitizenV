@@ -30,12 +30,11 @@ include_once 'head.php';
             <div class="card-header">
                 <form action="addMaTinh.php" method="post">
                     <label for="">Tỉnh</label>
-                    <select id="tenTinh" name="tenTinh">
+                    <select id="idTinh" name="idTinh">
                         <option value="">--Chọn tỉnh--</option>
                         <?php
                         foreach ($rs as $value) {
-                            var_dump($value['ten_tinh']);
-                            echo '<option value="' . $value['ten_tinh'] . '">' . $value['ten_tinh'] . '</option>';
+                            echo '<option value="' . $value['id'] . '">' . $value['ten_tinh'] . '</option>';
                         }
                         ?>
                     </select>
@@ -93,6 +92,9 @@ include_once 'head.php';
                             </div>
                             <!-- Modal body -->
                             <div class="modal-body">
+                                <div>
+                                    <input type="hidden" id="edit_id_tinh" name="idTinh">
+                                </div>
                                 <div>
                                     <label for="ten_tinh">Tỉnh:</label>
                                     <input type="text" id="edit_ten_tinh" name="ten_tinh" readonly>
@@ -164,6 +166,7 @@ include_once 'head.php';
                 },
                 dataType: 'json',
                 success: function(response) {
+                    $('#edit_id_tinh').val(response.id);
                     $('#edit_ten_tinh').val(response.ten_tinh);
                     $('#edit_ma_tinh').val(response.ma_tinh);
                     $('#del_ten_tinh').html(response.ten_tinh);

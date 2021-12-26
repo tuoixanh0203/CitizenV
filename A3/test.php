@@ -45,17 +45,17 @@ foreach($qr as $value){
 
                 <form action="addMaXa.php" method="post">
                     <label for="">Phường/Xã</label>
-                    <select id="tenXa" name="tenXa">
+                    <select id="idXa" name="idXa">
                         <option value="">--Chọn phường/xã--</option>
                         <?php
                         foreach ($rs as $value) {
-                            echo '<option value="' . $value['ten_phuong_xa'] . '">' . $value['ten_phuong_xa'] . '</option>';
+                            echo '<option value="' . $value['id'] . '">' . $value['ten_phuong_xa'] . '</option>';
                         }
                         ?>
                     </select>
                     <label for="">Mã:</label>
                     <input required="true" type="text" id="maXa" name="maXa" placeholder="<?php echo $_SESSION['username']; ?>xx">
-                    <button>Save</button>
+                    <button class="khai_bao">Save</button>
                 </form>
 
     <div>
@@ -95,6 +95,9 @@ foreach($rsMaXa as $vl) {
         </div>
         <!-- Modal body -->
         <div class="modal-body">
+            <div>
+                <input type="hidden" id="edit_id_xa" name="idXa">
+            </div>
             <div>
                 <label for="ten_phuong_xa">Phường/Xã:</label>
                 <input type="text" id="edit_ten_phuong_xa" name="ten_phuong_xa" readonly>
@@ -171,6 +174,7 @@ foreach($rsMaXa as $vl) {
         data: {ma_phuong_xa:ma_phuong_xa},
         dataType: 'json',
         success: function(response){
+            $('#edit_id_xa').val(response.id);
             $('#edit_ten_phuong_xa').val(response.ten_phuong_xa);
             $('#edit_ma_phuong_xa').val(response.ma_phuong_xa);
             $('#del_ten_phuong_xa').html(response.ten_phuong_xa);

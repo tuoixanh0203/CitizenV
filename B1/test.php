@@ -45,7 +45,7 @@ foreach($qr as $value){
                     <input required="true" type="text" id="tenThon" name="tenThon">
                     <label for="">Mã:</label>
                     <input required="true" type="text" id="maThon" name="maThon" placeholder="<?php echo $_SESSION['username']; ?>xx">
-                    <button>Save</button>
+                    <button class="khai_bao">Save</button>
                 </form>
 
     <div>
@@ -137,6 +137,7 @@ foreach($rsMaThon as $vl) {
     $('.khai_bao').click(function(e){
         e.preventDefault();
         if(!<?php echo $enable; ?>) {
+            // console.log("false");
             alert("Ngoài thời hạn khai báo");
             location.reload();
         }

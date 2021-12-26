@@ -44,17 +44,17 @@ foreach($qr as $value){
 
                 <form action="addMaHuyen.php" method="post">
                     <label for="">Quận/Huyện</label>
-                    <select id="tenHuyen" name="tenHuyen">
+                    <select id="idHuyen" name="idHuyen">
                         <option value="">--Chọn quận/huyện--</option>
                         <?php
                         foreach ($rs as $value) {
-                            echo '<option value="' . $value['ten_quan_huyen'] . '">' . $value['ten_quan_huyen'] . '</option>';
+                            echo '<option value="' . $value['id'] . '">' . $value['ten_quan_huyen'] . '</option>';
                         }
                         ?>
                     </select>
                     <label for="">Mã:</label>
                     <input required="true" type="text" id="maHuyen" name="maHuyen" placeholder="<?php echo $_SESSION['username']; ?>xx">
-                    <button>Save</button>
+                    <button class="khai_bao">Save</button>
                 </form>
 
     <div>
@@ -94,6 +94,9 @@ foreach($rsMaHuyen as $vl) {
         </div>
         <!-- Modal body -->
         <div class="modal-body">
+            <div>
+                <input type="hidden" id="edit_id_huyen" name="idHuyen">
+            </div>
             <div>
                 <label for="ten_quan_huyen">Quận/Huyện:</label>
                 <input type="text" id="edit_ten_quan_huyen" name="ten_quan_huyen" readonly>
@@ -144,11 +147,11 @@ foreach($rsMaHuyen as $vl) {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script type="text/javascript">
     $('.khai_bao').click(function(e){
-        e.preventDefault();
-        if(!<?php echo $enable; ?>) {
-            <?php $_SESSION['success'] = 'Ngoài thời hạn khai báo!'; ?>
-            location.reload();
-        }
+            e.preventDefault();
+            if(!<?php echo $enable; ?>) {
+                alert("Ngoài thời hạn khai báo");
+                location.reload();
+            }
     });
     $('.edit').click(function(e){
         e.preventDefault();
@@ -170,6 +173,7 @@ foreach($rsMaHuyen as $vl) {
         data: {ma_quan_huyen:ma_quan_huyen},
         dataType: 'json',
         success: function(response){
+            $('#edit_id_huyen').val(response.id);
             $('#edit_ten_quan_huyen').val(response.ten_quan_huyen);
             $('#edit_ma_quan_huyen').val(response.ma_quan_huyen);
             $('#del_ten_quan_huyen').html(response.ten_quan_huyen);

@@ -20,8 +20,10 @@
         $rs = executeResult($sql);
         foreach($rs as $value){
             $ten_thon_ban = $value['ten_thon_ban'];
+            echo $ten_thon_ban;
+            // echo $_SESSION['username'];
         }
-        echo $ten_thon_ban;
+        // echo $ten_thon_ban;
         ?>    
         <i class="fas fa-user"></i>
         </a>
