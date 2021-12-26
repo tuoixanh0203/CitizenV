@@ -45,6 +45,7 @@ include_once 'head.php';
                             font-weight: 400;">
                     <thead class="table-success">
                         <th>Phường/Xã</th>
+                        <th>Trạng thái</th>
                         <th>Username(Mã phường/xã)</th>
                         <th>Thời gian bắt đầu khai báo</th>
                         <th>Thời gian kết thúc khai báo</th>
@@ -60,6 +61,13 @@ include_once 'head.php';
                         foreach ($rs as $vl) {
                             echo '<tr>
                             <td>' . $vl['ten_phuong_xa'] . '</td>
+                            <td>'; 
+                            if($vl['status']) {
+                                echo "Đã hoàn thành";
+                            } else {
+                                echo "Đang cập nhật";
+                            }
+                            echo '</td>
                             <td>' . $vl['username'] . '</td>
                             <td>' . $vl['start'] . '</td>
                             <td>' . $vl['end'] . '</td>

@@ -51,17 +51,17 @@ include_once 'head.php';
             <div class="card-header">
                 <form action="addMaXa.php" method="post">
                     <label for="">Phường/Xã</label>
-                    <select id="tenXa" name="tenXa">
+                    <select id="idXa" name="idXa">
                         <option value="">--Chọn phường/xã--</option>
                         <?php
                         foreach ($result as $value) {
-                            // var_dump($value['ten_quan_huyen']);
-                            echo '<option value="' . $value['ten_phuong_xa'] . '">' . $value['ten_phuong_xa'] . '</option>';
+                            echo '<option value="' . $value['id'] . '">' . $value['ten_phuong_xa'] . '</option>';
+                            // echo '<option value="' . $value['id'] . '">' . $idT . '</option>';
                         }
                         ?>
                     </select>
-                    <label for="">Mã:</label>
-                    <input required="true" type="text" id="maXa" name="maXa" placeholder="<?php echo $usn; ?>xx">
+                    <label for="cars">Mã:</label>
+                    <input required="true" type="text" id="maXa" name="maXa" placeholder="<?php echo $usn; ?>xx" pattern="<?php echo $usn; ?>[0-9]{2}">
                     <button class="khai_bao">Save</button>
                 </form>
             </div>

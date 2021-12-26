@@ -3,22 +3,27 @@ session_start();
 require_once ('dbhelp.php');
 $usn = $_SESSION['username'];
 
-$sql = "SELECT (CURRENT_DATE() >= start AND CURRENT_DATE <= end) as ena FROM users WHERE username = '".$_SESSION['username']."'";
+$sql = "SELECT (CURRENT_DATE() >= start AND CURRENT_DATE <= end) as ena FROM users WHERE username = '$usn'";
 $rs = executeResult($sql);
 
 foreach($rs as $value){
     $ena = $value['ena'];
 }
-echo $ena;
 
-if(!$ena) {
-    $sql = "UPDATE users SET enable=false WHERE username LIKE '".$_SESSION['username']."%'";
-    $qr = execute($sql);
-} else {
-    $sql = "UPDATE users SET enable=true WHERE username LIKE '".$_SESSION['username']."%'";
-    $qr = execute($sql);
+$sql = "SELECT (CURRENT_DATE() >= start AND CURRENT_DATE <= end) as enaPre FROM users WHERE username = substring('$usn', 1, 2)";
+$r = executeResult($sql);
+
+foreach($r as $value){
+    $enaPre = $value['enaPre'];
 }
 
+if($ena && $enaPre) {
+    $sql = "UPDATE users SET enable=true WHERE username LIKE '$usn%'";
+    $qr = execute($sql);
+} else {
+    $sql = "UPDATE users SET enable=false WHERE username LIKE '$usn%'";
+    $qr = execute($sql);
+}
 
 $sql = "SELECT COUNT(*) as total FROM person WHERE ma_khu_vuc like '$usn%'";
  $rs = executeResult($sql);
@@ -97,32 +102,9 @@ $sql = "SELECT COUNT(*) as total FROM person WHERE ma_khu_vuc like '$usn%'";
             </div>
           </div>
         </div>
-        <div class="col-md-3 mb-3">
-          <div class="card bg-success text-white h-100">
-            <div class="card-body py-5">Success Card</div>
-            <div class="card-footer d-flex">
-              View Details
-              <span class="ms-auto">
-                <i class="fas fa-chevron-right"></i>
-              </span>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3 mb-3">
-          <div class="card bg-danger text-white h-100">
-            <div class="card-body py-5">Danger Card</div>
-            <div class="card-footer d-flex">
-              View Details
-              <span class="ms-auto">
-                <i class="fas fa-chevron-right"></i>
-              </span>
-            </div>
-          </div>
-        </div>
       </div>
 
       <div class="row">
-        <div class="col-md-6 mb-3">
           <div class="card h-100">
             <div class="card-header">
               <span class="me-2"><i class="fas fa-analytics"></i></span>
@@ -132,7 +114,6 @@ $sql = "SELECT COUNT(*) as total FROM person WHERE ma_khu_vuc like '$usn%'";
               <div id="myPlot"></div>
             </div>
           </div>
-        </div>
       </div>
     </div>
     </div>

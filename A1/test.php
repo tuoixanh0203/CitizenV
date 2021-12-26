@@ -39,7 +39,7 @@ include_once 'head.php';
                         ?>
                     </select>
                     <label for="cars">Mã:</label>
-                    <input required="true" type="text" id="maTinh" name="maTinh">
+                    <input required="true" type="text" id="maTinh" name="maTinh" placeholder="xx" pattern="[0-9]{2}">
                     <button>Save</button>
                 </form>
             </div>

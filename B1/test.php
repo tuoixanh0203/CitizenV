@@ -33,7 +33,7 @@ include_once 'head.php';
     include_once 'layout/menubar.php';
     ?>
     <main class="mt-4 pt-5">
-        <h3 class="p-2">Cấp mã huyện</h3>
+        <h3 class="p-2">Cấp mã thôn/bản</h3>
         <div class="container-fluid card shadow-sm p-3 mb-5 bg-body rounded ">
             <?php
             if (isset($_SESSION['success'])) {
@@ -50,7 +50,7 @@ include_once 'head.php';
                     <label for="">Thôn/Bản</label>
                     <input required="true" type="text" id="tenThon" name="tenThon">
                     <label for="">Mã:</label>
-                    <input required="true" type="text" id="maThon" name="maThon" placeholder="<?php echo $usn; ?>xx">
+                    <input required="true" type="text" id="maThon" name="maThon" placeholder="<?php echo $usn; ?>xx" pattern="<?php echo $usn; ?>[0-9]{2}">
                     <button class="khai_bao">Save</button>
                 </form>
             </div>

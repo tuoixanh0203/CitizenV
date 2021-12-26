@@ -28,32 +28,6 @@
           </div>
         </li>
         <li>
-          <!-- <a class="nav-link px-4 sidebar-link" data-bs-toggle="collapse" data-toggle="collapse" href="#more">
-            <span class="me-2"><i class="fas fa-book-open"></i></span>
-            <span>Quản lý</span>
-            <span class="ms-auto">
-              <span class="right-icon">
-                <i class="fas fa-chevron-down"></i>
-              </span>
-            </span>
-          </a>
-          <div class="collapse" id="more">
-            <ul class="navbar-nav ps-3">
-              <li>
-                <a href="test.php" class="nav-link px-4">
-                  <span class="me-2"><i class="fas fa-qrcode"></i></span>
-                  <span>Cấp mã thôn/bản</span>
-                </a>
-              </li>
-              <li>
-                <a href="createB2.php" class="nav-link px-4">
-                  <span class="me-2"><i class="fas fa-users-cog"></i></span>
-                  <span>Cấp tài khoản</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </li> -->
         <li>
           <a href="citizen.php" class="nav-link px-4">
             <span class="me-2"><i class="fas fa-users"></i></span>
@@ -73,18 +47,6 @@
           <a href="#" class="nav-link px-4">
             <span class="me-2"><i class="fas fa-list-alt"></i></span>
             <span>Danh sách công dân</span>
-          </a>
-        </li>
-        <li>
-          <a href="#" class="nav-link px-4">
-            <span class="me-2"><i class="fas fa-stream"></i></span>
-            <span>Danh sách mã tỉnh</span>
-          </a>
-        </li>
-        <li>
-          <a href="#" class="nav-link px-4">
-            <span class="me-2"><i class="fas fa-th-list"></i></span>
-            <span>Danh sách User</span>
           </a>
         </li>
       </ul>

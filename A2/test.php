@@ -74,7 +74,7 @@ include_once 'head.php';
                         ?>
                     </select>
                     <label for="cars">Mã:</label>
-                    <input required="true" type="text" id="maHuyen" name="maHuyen" placeholder="<?php echo $usn; ?>xx">
+                    <input required="true" type="text" id="maHuyen" name="maHuyen" placeholder="<?php echo $usn; ?>xx" pattern="<?php echo $usn; ?>[0-9]{2}">
                     <button class="khai_bao">Save</button>
                 </form>
             </div>

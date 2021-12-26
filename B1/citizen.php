@@ -7,6 +7,13 @@ $qr = executeResult($sql);
 foreach ($qr as $value) {
     $enable = $value['enable'];
 }
+
+$sql = "SELECT status FROM users WHERE username = '$usn'";
+$query = executeResult($sql);
+foreach ($query as $value) {
+    $status = $value['status'];
+}
+
 ?>
 
 <?php
@@ -22,10 +29,11 @@ include_once 'head.php';
     ?>
     <main class="mt-4 pt-5">
         <div class="container-fluid card shadow-sm p-3 mb-5 bg-body rounded fs-6">
+            <form action="updateStatus.php">
+                <button class="btn btn-success"><span class="update"></span></button>
+            </form>
             <div class="card-header">
                 <button type="button" class="btn btn-primary khai_bao add">New</button>
-
-
             </div>
             <?php
                 if (isset($_SESSION['success'])) {
@@ -115,6 +123,15 @@ include_once 'head.php';
             <?php include 'person_modal.php'; ?>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
             <script>
+                $(document).ready(() => {
+                    if(!<?php echo $status; ?>) {
+                        $(".update").html("Đã hoàn thành");
+                    } else {
+                        $(".update").html("Hoàn tác");
+                    }
+                    
+                });
+
                 $(function() {
                     $('.khai_bao').click(function(e) {
                         e.preventDefault();

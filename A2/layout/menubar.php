@@ -82,13 +82,7 @@
         <li>
           <a href="#" class="nav-link px-4">
             <span class="me-2"><i class="fas fa-stream"></i></span>
-            <span>Danh sách mã tỉnh</span>
-          </a>
-        </li>
-        <li>
-          <a href="#" class="nav-link px-4">
-            <span class="me-2"><i class="fas fa-th-list"></i></span>
-            <span>Danh sách User</span>
+            <span>Danh sách quận/huyện</span>
           </a>
         </li>
       </ul>

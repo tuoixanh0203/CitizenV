@@ -11,10 +11,9 @@ if (!empty($_POST)) {
     }
 
     $sql = "UPDATE phuong_xa SET ma_phuong_xa='$maXa' WHERE id = '$idXa'";
+    // echo $sql;
     execute($sql);
     $_SESSION['success'] = 'Add Success';
 }
-
 header('location: test.php');
-
 ?>
