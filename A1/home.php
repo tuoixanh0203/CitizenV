@@ -11,9 +11,24 @@ require_once ('dbhelp.php');
  foreach($rs as $value){
      $totalMale = $value['total'];
  }
-
  $malePercent = ($totalMale / $totalPerson) * 100;
  $femalePercent = 100 - $malePercent;
+
+ $sql = "SELECT COUNT(*) as total FROM person WHERE year(CURRENT_DATE()) - year(ngay_sinh) < 15";
+ $rs = executeResult($sql);
+ foreach($rs as $value){
+     $duoild = $value['total'];
+ }
+ $sql = "SELECT COUNT(*) as total FROM person WHERE year(CURRENT_DATE()) - year(ngay_sinh) >= 15 AND year(CURRENT_DATE()) - year(ngay_sinh) <= 59";
+ $rs = executeResult($sql);
+ foreach($rs as $value){
+     $trongld = $value['total'];
+ }
+ $sql = "SELECT COUNT(*) as total FROM person WHERE year(CURRENT_DATE()) - year(ngay_sinh) >= 60";
+ $rs = executeResult($sql);
+ foreach($rs as $value){
+     $trenld = $value['total'];
+ }
 
 ?>
 
@@ -62,7 +77,7 @@ require_once ('dbhelp.php');
         </div>
         <div class="col-md-3 mb-3">
           <div class="card bg-warning text-dark h-100">
-            <div class="card-body py-5">Warning Card</div>
+          <!-- <div id="genderPercent"></div> -->
             <div class="card-footer d-flex">
               View Details
               <span class="ms-auto">
@@ -124,8 +139,8 @@ require_once ('dbhelp.php');
     }
 </script>
 <script>
-var xArray = ["Dưới độ tuổi lao động", "Trong độ tuổi lao động", "Trên độ tuổi lao động"];
-var yArray = [55, 49, 44];
+var xArray = ["Dưới độ tuổi lao động(0-14 tuổi)", "Trong độ tuổi lao động(15-59 tuổi)", "Trên độ tuổi lao động(60 tuổi trở lên)"];
+var yArray = [<?php echo $duoild; ?>, <?php echo $trongld; ?>, <?php echo $trenld; ?>];
 
 var data = [{
   x:xArray,
