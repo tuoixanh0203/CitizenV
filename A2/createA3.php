@@ -62,8 +62,8 @@ include_once 'head.php';
                             <td>' . $vl['username'] . '</td>
                             <td>' . $vl['start'] . '</td>
                             <td>' . $vl['end'] . '</td>
-                            <td><button class="edit khai_bao" data-id="' . $vl['ma_tinh'] . '">Edit</button> 
-                                <button class="delete khai_bao" data-id="' . $vl['ma_tinh'] . '">Delete</button>
+                            <td><button class="edit khai_bao" data-id="' . $vl['ma_quan_huyen'] . '">Edit</button> 
+                                <button class="delete khai_bao" data-id="' . $vl['ma_quan_huyen'] . '">Delete</button>
                             </td>
                         </tr>';
                         }
@@ -80,8 +80,7 @@ include_once 'head.php';
                         $('.khai_bao').click(function(e) {
                             e.preventDefault();
                             if (!<?php echo $enable; ?>) {
-                                // alert("Ngoài thời hạn khai báo");
-                                <?php $_SESSION['success'] = 'Ngoài thời hạn khai báo!'; ?>
+                                alert("Ngoài thời hạn khai báo");
                                 location.reload();
                             }
                         });

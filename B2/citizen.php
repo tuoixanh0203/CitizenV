@@ -10,10 +10,6 @@ foreach ($qr as $value) {
 ?>
 
 <?php
-// include_once 'head.php';
-?>
-
-<?php
 include_once 'head.php';
 ?>
 
@@ -143,6 +139,7 @@ include_once 'head.php';
                         });
                     }
                 </script>
+    </main>
 </body>
 
 </html>

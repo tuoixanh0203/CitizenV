@@ -9,9 +9,8 @@ foreach ($rs as $value) {
     $idH = $value['id'];
 }
 
-// echo $_SESSION['username'];
 $sql = "select * from phuong_xa where ma_phuong_xa is null and id_quan_huyen = $idH";
-$rs = executeResult($sql);
+$result = executeResult($sql);
 
 $sql = "select * from phuong_xa where ma_phuong_xa is not null and id_quan_huyen = $idH";
 $rsMaXa = executeResult($sql);
@@ -20,20 +19,6 @@ $sql = "SELECT enable FROM users WHERE username = '$usn'";
 $qr = executeResult($sql);
 foreach ($qr as $value) {
     $enable = $value['enable'];
-}
-
-if (!empty($_POST)) {
-    if (isset($_POST['tenXa'])) {
-        $tenXa = $_POST['tenXa'];
-    }
-
-    if (isset($_POST['maXa'])) {
-        $maXa = $_POST['maXa'];
-    }
-
-    $sql = "UPDATE phuong_xa SET ma_phuong_xa='$maXa' WHERE ten_phuong_xa = '$tenXa'";
-    execute($sql);
-    header("Refresh:0");
 }
 
 ?>
@@ -64,12 +49,12 @@ include_once 'head.php';
             }
             ?>
             <div class="card-header">
-                <form action="" method="post">
+                <form action="addMaXa.php" method="post">
                     <label for="">Phường/Xã</label>
                     <select id="tenXa" name="tenXa">
                         <option value="">--Chọn phường/xã--</option>
                         <?php
-                        foreach ($rs as $value) {
+                        foreach ($result as $value) {
                             // var_dump($value['ten_quan_huyen']);
                             echo '<option value="' . $value['ten_phuong_xa'] . '">' . $value['ten_phuong_xa'] . '</option>';
                         }
@@ -118,6 +103,9 @@ include_once 'head.php';
                         </div>
                         <!-- Modal body -->
                         <div class="modal-body">
+                            <div>
+                                <input type="hidden" id="edit_id_xa" name="idXa">
+                            </div>
                             <div>
                                 <label for="ten_phuong_xa">Phường/Xã:</label>
                                 <input type="text" id="edit_ten_phuong_xa" name="ten_phuong_xa" readonly>
@@ -196,6 +184,7 @@ include_once 'head.php';
                     },
                     dataType: 'json',
                     success: function(response) {
+                        $('#edit_id_xa').val(response.id);
                         $('#edit_ten_phuong_xa').val(response.ten_phuong_xa);
                         $('#edit_ma_phuong_xa').val(response.ma_phuong_xa);
                         $('#del_ten_phuong_xa').html(response.ten_phuong_xa);

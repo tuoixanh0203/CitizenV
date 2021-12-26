@@ -18,20 +18,6 @@ foreach ($qr as $value) {
     $enable = $value['enable'];
 }
 
-if (!empty($_POST)) {
-    if (isset($_POST['tenThon'])) {
-        $tenThon = $_POST['tenThon'];
-    }
-
-    if (isset($_POST['maThon'])) {
-        $maThon = $_POST['maThon'];
-    }
-
-    $sql = "INSERT INTO thon_ban(ma_thon_ban, ten_thon_ban, id_phuong_xa) VALUES ('$maThon','$tenThon', $idX)";
-    execute($sql);
-    header("Refresh:0");
-}
-
 ?>
 
 
@@ -60,7 +46,7 @@ include_once 'head.php';
             }
             ?>
             <div class="card-header">
-                <form action="" method="post">
+                <form action="addMaThon.php" method="post">
                     <label for="">Thôn/Bản</label>
                     <input required="true" type="text" id="tenThon" name="tenThon">
                     <label for="">Mã:</label>

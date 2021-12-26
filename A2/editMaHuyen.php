@@ -8,6 +8,7 @@ if(!empty($_POST)){
 
     $sql = "UPDATE quan_huyen SET ma_quan_huyen='$ma_quan_huyen' WHERE id = '$idHuyen'";
     execute($sql);
+    // echo $sql;
     $_SESSION['success'] = 'Edit Success';
 }
 

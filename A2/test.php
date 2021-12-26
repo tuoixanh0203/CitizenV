@@ -8,9 +8,8 @@ foreach ($rs as $value) {
     $idT = $value['id'];
 }
 
-// echo $_SESSION['username'];
 $sql = "select * from quan_huyen where ma_quan_huyen is null and id_tinh = $idT";
-$rs = executeResult($sql);
+$result = executeResult($sql);
 
 $sql = "select * from quan_huyen where ma_quan_huyen is not null and id_tinh = $idT";
 $rsMaHuyen = executeResult($sql);
@@ -63,14 +62,14 @@ include_once 'head.php';
             }
             ?>
             <div class="card-header">
-                <form action="" method="post">
-                    <label for="">Huyện</label>
-                    <select id="tenHuyen" name="tenHuyen">
-                        <option value="">--Chọn huyện--</option>
+                <form action="addMaHuyen.php" method="post">
+                    <label for="">Quận/Huyện</label>
+                    <select id="idHuyen" name="idHuyen">
+                        <option value="">--Chọn quận/huyện--</option>
                         <?php
-                        foreach ($rs as $value) {
-                            var_dump($value['ten_quan_huyen']);
-                            echo '<option value="' . $value['ten_quan_huyen'] . '">' . $value['ten_quan_huyen'] . '</option>';
+                        foreach ($result as $value) {
+                            echo '<option value="' . $value['id'] . '">' . $value['ten_quan_huyen'] . '</option>';
+                            // echo '<option value="' . $value['id'] . '">' . $idT . '</option>';
                         }
                         ?>
                     </select>
@@ -91,10 +90,11 @@ include_once 'head.php';
 
                     foreach ($rsMaHuyen as $vl) {
                         echo '<tr>
-        <td>' . $vl['ma_quan_huyen'] . '</td>
-        <td>' . $vl['ten_quan_huyen'] . '</td>
-        <td><button class="edit khai_bao" data-id="' . $vl['ma_tinh'] . '">Edit</button> <button class="delete khai_bao" data-id="' . $vl['ma_tinh'] . '">Delete</button></td>
-    </tr>';
+                            <td>' . $vl['ma_quan_huyen'] . '</td>
+                            <td>' . $vl['ten_quan_huyen'] . '</td>
+                            <td><button class="edit khai_bao" data-id="' . $vl['ma_quan_huyen'] . '">Edit</button> 
+                            <button class="delete khai_bao" data-id="' . $vl['ma_quan_huyen'] . '">Delete</button></td>
+                        </tr>';
                     }
 
                     ?>
@@ -112,6 +112,9 @@ include_once 'head.php';
                             </div>
                             <!-- Modal body -->
                             <div class="modal-body">
+                                <div>
+                                    <input type="hidden" id="edit_id_huyen" name="idHuyen">
+                                </div>
                                 <div>
                                     <label for="ten_quan_huyen">Quận/Huyện:</label>
                                     <input type="text" id="edit_ten_quan_huyen" name="ten_quan_huyen" readonly>
@@ -190,6 +193,7 @@ include_once 'head.php';
                         },
                         dataType: 'json',
                         success: function(response) {
+                            $('#edit_id_huyen').val(response.id);
                             $('#edit_ten_quan_huyen').val(response.ten_quan_huyen);
                             $('#edit_ma_quan_huyen').val(response.ma_quan_huyen);
                             $('#del_ten_quan_huyen').html(response.ten_quan_huyen);
