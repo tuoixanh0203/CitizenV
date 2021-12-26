@@ -66,6 +66,40 @@ require_once ('dbhelp.php');
             </div>
           </div>
         </div>
+        <div class="col-md-3 mb-3">
+          <div class="card bg-primary text-white h-100">
+              <div id="genderPercent"></div>
+            <div class="card-footer d-flex">
+              View Details
+              <span class="ms-auto">
+                <i class="fas fa-chevron-right"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 mb-3">
+          <div class="card bg-warning text-dark h-100">
+          <!-- <div id="genderPercent"></div> -->
+            <div class="card-footer d-flex">
+              View Details
+              <span class="ms-auto">
+                <i class="fas fa-chevron-right"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-3 mb-3">
+          <div class="card bg-danger text-white h-100">
+            <div class="card-body py-5">Danger Card</div>
+            <div class="card-footer d-flex">
+              View Details
+              <span class="ms-auto">
+                <i class="fas fa-chevron-right"></i>
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="row">
