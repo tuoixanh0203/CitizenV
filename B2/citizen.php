@@ -1,10 +1,10 @@
 <?php
-require_once ('dbhelp.php');
+require_once('dbhelp.php');
 session_start();
 $usn = $_SESSION['username'];
 $sql = "SELECT enable FROM users WHERE username = '$usn'";
 $qr = executeResult($sql);
-foreach($qr as $value){
+foreach ($qr as $value) {
     $enable = $value['enable'];
 }
 ?>
@@ -13,65 +13,61 @@ foreach($qr as $value){
 // include_once 'head.php';
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
-    <title>Document</title>
-</head>
+<?php
+include_once 'head.php';
+?>
+
 <body>
     <?php
-    // include_once 'layout/navbar.php';
+    include_once 'layout/navbar.php';
     ?>
     <?php
-    // include_once 'layout/menubar.php';
+    include_once 'layout/menubar.php';
     ?>
 
-    <form action="" method="get">
-        <input type="text" name="s" placeholder="Tìm kiếm theo số CMND/CCCD hoặc tên">
-        <button>Search</button>
-    </form>
+    <main class="mt-4 pt-5">
+        <!-- <h3 class="p-2">Citizen</h3> -->
+        <div class="container-fluid card shadow-sm p-3 mb-5 bg-body rounded fs-6">
+            <div class="card-header">
+                <button type="button" class="btn btn-primary khai_bao" data-bs-toggle="modal" data-bs-target="#addPerson">New</button>
+            </div>
 
-    <?php
-        if (isset($_SESSION['success'])) {
-            echo "
-                <div class='alert alert-success alert-dismissible fade show' role='alert'>
-                <h4><i class='icon fas fa-check'></i> Success!</h4> " . $_SESSION['success'] . "
-                <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
-                </div>";
-                unset($_SESSION['success']);
-        }
-    ?>
-    <button type="button" class="btn btn-primary khai_bao add">New</button>
-    <table>
-        <thead>
-            <tr>
-                <th>Số CCCD/CMND</th>
-                <th>Họ và tên</th>
-                <th>Ngày sinh</th>
-                <th>Giới tính</th>
-                <th>Quê quán</th>
-                <th>Địa chỉ thường trú</th>
-                <th>Địa chỉ tạm trú</th>
-                <th>Tôn giáo</th>
-                <th>Trình độ văn hóa</th>
-                <th>Nghề nghiệp</th>
-                <th></th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody id="bodydata">
-            <?php
-                if (isset($_GET['s']) && $_GET['s'] != '') {
-                    $sql = "SELECT * FROM person WHERE (cccd LIKE '".$_GET['s']."%' OR ho_ten LIKE '%".$_GET['s']."%') AND ma_khu_vuc LIKE '".$_SESSION['username']."%'";
-                } else {
-                    $sql = "SELECT * FROM person WHERE ma_khu_vuc LIKE '".$_SESSION['username']."%'";
-                }
-                $rs = executeResult($sql);
+            <div class="card-body shadow-sm p-3 mb-5 bg-body rounded">
+                <form action="" method="get" class="d-flex ms-auto  justify-content-end  py-2">
+                    <div class="row">
+                        <div class="input-group ">
+                            <input type="text" name="s" class="form-control" placeholder="CMND/CCCD hoặc tên">
+                            <button class="btn btn-primary " type="submit">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                <table class="table table-bordered table-responsive table-hover text-start" style="font-family: 'Source Sans Pro','Helvetica Neue',Helvetica,Arial,sans-serif;
+                            font-weight: 400; font-size: 4">
+                    <thead class="table-success">
+                        <tr>
+                            <th>Số CCCD/CMND</th>
+                            <th>Họ và tên</th>
+                            <th>Ngày sinh</th>
+                            <th>Giới tính</th>
+                            <th>Quê quán</th>
+                            <th>Địa chỉ thường trú</th>
+                            <th>Địa chỉ tạm trú</th>
+                            <th>Tôn giáo</th>
+                            <th>Trình độ văn hóa</th>
+                            <th>Nghề nghiệp</th>
+                            <th>Công cụ</th>
+                        </tr>
+                    </thead>
+                    <tbody id="bodydata">
+                        <?php
+                        if (isset($_GET['s']) && $_GET['s'] != '') {
+                            $sql = "SELECT * FROM person WHERE (cccd LIKE '" . $_GET['s'] . "%' OR ho_ten LIKE '%" . $_GET['s'] . "%') AND ma_khu_vuc LIKE '" . $_SESSION['username'] . "%'";
+                        } else {
+                            $sql = "SELECT * FROM person WHERE ma_khu_vuc LIKE '" . $_SESSION['username'] . "%'";
+                        }
+                        $rs = executeResult($sql);
 
                         foreach ($rs as $vl) {
                             echo '<tr>
@@ -85,71 +81,68 @@ foreach($qr as $value){
                             <td>' . $vl['ton_giao'] . '</td>
                             <td>' . $vl['hoc_van'] . '</td>
                             <td>' . $vl['nghe_nghiep'] . '</td>
-                            <td><button class="edit khai_bao" data-id="'.$vl['id'].'">Edit</button></td>
-                            <td><button class="delete khai_bao" data-id="'.$vl['id'].'">Delete</button></td>
+                            <td><button class="edit khai_bao" data-id="' . $vl['id'] . '">Edit</button> <button class="delete khai_bao" data-id="' . $vl['id'] . '">Delete</button></td>
                         </tr>';
                         }
                         ?>
                     </tbody>
                 </table>
 
-    <?php include 'person_modal.php'; ?>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script>
-    $(function(){
-        $('.khai_bao').click(function(e){
-            e.preventDefault();
-            if(!<?php echo $enable; ?>) {
-                alert("Ngoài thời hạn khai báo");
-                location.reload();
-            }
-        });
-        $('.add').click(function(e){
-            e.preventDefault();
-            $('#addPerson').modal('show');
-        });
-        $('.edit').click(function(e){
-            e.preventDefault();
-            $('#editPerson').modal('show');
-            var id = $(this).data('id');
-            getData(id);
-        });
-        $('.delete').click(function(e){
-            e.preventDefault();
-            $('#deletePerson').modal('show');
-            var id = $(this).data('id');
-            getData(id);
-        });
-    });
+                <?php include 'person_modal.php'; ?>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+                <script>
+                    $(function() {
+                        $('.khai_bao').click(function(e) {
+                            e.preventDefault();
+                            if (!<?php echo $enable; ?>) {
+                                alert("Ngoài thời hạn khai báo");
+                                location.reload();
+                            }
+                        });
+                        $('.edit').click(function(e) {
+                            e.preventDefault();
+                            $('#editPerson').modal('show');
+                            var id = $(this).data('id');
+                            getData(id);
+                        });
+                        $('.delete').click(function(e) {
+                            e.preventDefault();
+                            $('#deletePerson').modal('show');
+                            var id = $(this).data('id');
+                            getData(id);
+                        });
+                    });
 
-        function getData(id){
-            $.ajax({
-            type: 'POST',
-            url: 'getData.php',
-            data: {id:id},
-            dataType: 'json',
-            success: function(response){
-                $('#edit_id').val(response.id);
-                $('#del_id').val(response.id);
-                $('#edit_cccd').val(response.cccd);
-                $('#edit_ho_ten').val(response.ho_ten);
-                $('#del_ho_ten').html(response.ho_ten);
-                $('#edit_ngay_sinh').val(response.ngay_sinh);
-                if(response.gioi_tinh == "Nam") {
-                    $('input:radio[name="gioi_tinh"]').filter('[value="Nam"]').attr('checked', true);
-                } else {
-                    $('input:radio[name="gioi_tinh"]').filter('[value="Nữ"]').attr('checked', true);
-                }
-                $('#edit_que_quan').val(response.que_quan);
-                $('#edit_thuong_tru').val(response.thuong_tru);
-                $('#edit_tam_tru').val(response.tam_tru);
-                $('#edit_ton_giao').val(response.ton_giao);
-                $('#edit_hoc_van').val(response.hoc_van);
-                $('#edit_nghe_nghiep').val(response.nghe_nghiep);
-            }
-            });
-        }
-</script>
+                    function getData(id) {
+                        $.ajax({
+                            type: 'POST',
+                            url: 'getData.php',
+                            data: {
+                                id: id
+                            },
+                            dataType: 'json',
+                            success: function(response) {
+                                $('#edit_id').val(response.id);
+                                $('#del_id').val(response.id);
+                                $('#edit_cccd').val(response.cccd);
+                                $('#edit_ho_ten').val(response.ho_ten);
+                                $('#del_ho_ten').html(response.ho_ten);
+                                $('#edit_ngay_sinh').val(response.ngay_sinh);
+                                if (response.gioi_tinh == "Nam") {
+                                    $('input:radio[name="gioi_tinh"]').filter('[value="Nam"]').attr('checked', true);
+                                } else {
+                                    $('input:radio[name="gioi_tinh"]').filter('[value="Nữ"]').attr('checked', true);
+                                }
+                                $('#edit_que_quan').val(response.que_quan);
+                                $('#edit_thuong_tru').val(response.thuong_tru);
+                                $('#edit_tam_tru').val(response.tam_tru);
+                                $('#edit_ton_giao').val(response.ton_giao);
+                                $('#edit_hoc_van').val(response.hoc_van);
+                                $('#edit_nghe_nghiep').val(response.nghe_nghiep);
+                            }
+                        });
+                    }
+                </script>
 </body>
 
 </html>
