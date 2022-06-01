@@ -44,7 +44,7 @@
           <div class="collapse" id="more">
             <ul class="navbar-nav ps-3">
               <li>
-                <a href="test.php" class="nav-link px-4">
+                <a href="addMaXa.php" class="nav-link px-4">
                   <span class="me-2"><i class="fas fa-qrcode"></i></span>
                   <span>Cấp mã phường/xã</span>
                 </a>
